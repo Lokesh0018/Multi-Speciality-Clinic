@@ -1,0 +1,81 @@
+# Dr. Kimidi Multispeciality Clinic — Design System
+
+Brand theme from the logo (`public/media/logo.png`): crimson cross and profile, navy tooth, clean white grounds.
+Stack: React 18 · Vite 6 · Tailwind CSS v4 · GSAP 3 (ScrollTrigger, @gsap/react).
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build
+```
+
+## Replacing placeholders
+
+All content lives in `src/content/clinic.js`. Anything in `[brackets]` or an empty string is a placeholder.
+Publish only information the clinic has verified: contact numbers, doctor names, qualifications,
+registration numbers, services, addresses, hours and FAQ answers.
+
+- **WhatsApp / phone**: set `clinic.contact.whatsapp` (digits only, e.g. `91XXXXXXXXXX`) and `clinic.contact.phone` (`+91…`).
+  Until they're set, every CTA scrolls to `#contact` so no wrong number is ever dialled. Each branch can override them.
+- **Hero film**: add `public/media/hero-loop.webm` and `hero-loop.mp4` (plus an optional `poster`).
+  For a seamless loop, export 12–20 s at 1080p with the last frame matching the first (or crossfade the tail into the head), with no audio, under about 6 MB.
+  Until then, a slowly drifting forest-and-champagne light scene shows in its place.
+- **Logo**: the header and footer use `public/media/logo-mark.png`, a tight crop of `logo.png`. The artwork has a white background, so it sits on a white tile. A transparent SVG or PNG would let it sit directly on navy.
+- **Sample photography**: `public/media/placeholders/*.jpg` are free stock photos from Pexels (Pexels licence). Doctor portraits carry a visible "Sample photo" badge (`image.sample: true`). Replace all of them with the clinic's own photos before launch.
+- **Photography**: set `image.src` on specialities, doctors and branches. Frames are fixed at 4:5 (speciality, portrait) and 16:10 (branch).
+  Each frame shows a labelled placeholder until it gets an image.
+- **Maps**: set `branch.mapUrl`. Until then, "Directions" runs a Google Maps search for the clinic name and branch.
+
+## Tokens (`src/index.css` → `@theme`)
+
+| Role | Token | Hex | Use |
+|---|---|---|---|
+| Ground | `paper-100` | #F7F8FB | Page background |
+| Surface | `paper-50` | #FFFFFF | Cards, alternate sections |
+| Text / dark surface | `navy-900` | #122451 | Headings, body, hero/journey/contact panels |
+| Logo navy | `navy-800` | #162C5D | Brand reference |
+| Secondary text | `muted` | #4A5573 | Body copy on paper (7.3:1) |
+| Primary CTA | `crimson-500` | #AD0407 | Logo red: WhatsApp / enquiry buttons (white text 7.6:1) |
+| Accent text | `crimson-600` | #9A0A10 | Eyebrows, labels, icons |
+| Deep red | `crimson-700` | #6F0205 | CTA hover |
+| Detail | `blush-300/400` | #F3BCC0 / #E3838A | Text on navy only; decorative numerals and lines on paper |
+
+**Type:** Cormorant Garamond (display, 400–600 plus italic accents) and Manrope (UI/body, 400–700).
+Scale: `display-xl` (hero), `display-lg` (section), `display-md` (sub-section), `lede` (17–18px), body 16px with 1.65 line-height, `eyebrow` (11.5px, 0.22em uppercase).
+
+**Shape:** cards 28px radius, pill buttons, 1px hairlines with a champagne fade. **Shadows:** `shadow-soft`, `shadow-lift`.
+**Spacing:** sections use `py-24 md:py-36`; the container is 1320px wide with 20px / 40px gutters.
+**Z-index:** mobile action bar 30 · header 40 · menu 50 · skip link 60.
+
+## Page structure
+
+1. **Floating header**: glass pill over the hero that turns solid ivory once you scroll past it. Holds Call and "Book on WhatsApp"; full-screen menu on mobile.
+2. **Hero**: full-screen video slot, masked headline reveal, WhatsApp and phone CTAs, three speciality shortcuts, and a pause/play control (WCAG 2.2.2).
+3. **Trust strip**: factual counts only (3 specialities, 2 branches, WhatsApp enquiries) plus one slot for a verified credential.
+4. **Clinic intro**: editorial split with overlapping photography, a story placeholder and a quote slot.
+5. **Specialities**: alternating 7/5 editorial rows for Skin, Hair and Dental. Each has a number, a summary, a service grid and an enquiry CTA that pre-fills WhatsApp.
+6. **Your visit**: forest section with a four-step patient journey.
+7. **Doctors**: three profile cards (portrait, speciality, qualifications, registration).
+8. **Branches**: PM Palem and MVP Colony cards with address, hours, WhatsApp, Call and Directions.
+9. **FAQ**: sticky heading and an accessible accordion.
+10. **Contact**: inset forest panel with an enquiry form that writes a WhatsApp message (no backend, nothing sent automatically) and a privacy note.
+11. **Footer**: links, branches and a medical disclaimer. On mobile, a sticky Call / WhatsApp bar stays at the bottom.
+
+## Motion (`src/App.jsx`)
+
+All motion is declared with data attributes and runs inside `gsap.matchMedia('(prefers-reduced-motion: no-preference)')`.
+With reduced motion on, nothing animates and the hero film shows its poster frame instead of autoplaying.
+
+| Attribute | Effect |
+|---|---|
+| `data-hero-line` | Masked line rise, 1.4 s expo.out, staggered |
+| `data-hero-fade` | Fade-up, staggered after the headline |
+| `data-hero-media` | Slow push-in (scale 1.08) while scrolling past the hero |
+| `data-reveal` | Fade-up 36px once, at 88% of the viewport |
+| `data-parallax` | ±5% drift inside photography frames |
+
+Micro-interactions use 200–300 ms colour and border transitions only. Nothing scales on hover, so layout never shifts.
+
+## Accessibility
+
+Skip link, semantic landmarks, labelled sections, visible sage focus rings, touch targets of at least 44–48px, form labels with inline errors and `aria-invalid`, an accordion using `aria-expanded`/`region`, the decorative video hidden from assistive tech, and a polite live region for form status.
