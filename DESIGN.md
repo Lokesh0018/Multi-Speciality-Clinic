@@ -51,7 +51,7 @@ Scale: `display-xl` (hero), `display-lg` (section), `display-md` (sub-section), 
 
 1. **Floating header**: glass pill over the hero that turns solid ivory once you scroll past it. Holds Call and "Book on WhatsApp"; full-screen menu on mobile.
 2. **Hero**: full-screen video slot, masked headline reveal, WhatsApp and phone CTAs, three speciality shortcuts, and a pause/play control (WCAG 2.2.2).
-3. **Trust strip**: factual counts only (3 specialities, 2 branches, WhatsApp enquiries) plus one slot for a verified credential.
+3. **Trust marquee** (`TrustMarquee.jsx`): white band under the hero; four facts scroll left continuously, faded at both edges. Each item: rounded-square crimson icon chip (fills solid crimson on hover, title turns crimson), Cormorant title over a muted detail line. Items are separated by small crimson medical crosses echoing the logo. 60 s loop, pauses on hover; static wrapped row under reduced motion. Content in `trustPoints`.
 4. **Clinic intro**: editorial split with overlapping photography, a story placeholder and a quote slot.
 5. **Specialities**: alternating 7/5 editorial rows for Skin, Hair and Dental. Each has a number, a summary, a service grid and an enquiry CTA that pre-fills WhatsApp.
 6. **Your visit**: forest section with a four-step patient journey.
@@ -68,11 +68,18 @@ With reduced motion on, nothing animates and the hero film shows its poster fram
 
 | Attribute | Effect |
 |---|---|
-| `data-hero-line` | Masked line rise, 1.4 s expo.out, staggered |
-| `data-hero-fade` | Fade-up, staggered after the headline |
-| `data-hero-media` | Slow push-in (scale 1.08) while scrolling past the hero |
 | `data-reveal` | Fade-up 36px once, at 88% of the viewport |
 | `data-parallax` | ±5% drift inside photography frames |
+
+### Hero (`src/components/hero/`)
+
+Four layers: `HeroVideo` (poster painted first, film fades in once it plays; hidden on autoplay refusal, source error or reduced motion), a navy gradient strongest on the left, `HeroContent` (eyebrow, ECG line, headline, CTAs, location) and `SpecialtyPanels` — three slanted, overlapping panels (`skewX(-9deg)` outer, counter-skewed image) pinned to the right half at lg+, a three-up card row below lg. `ScrollIndicator` and a film pause/play control sit at the foot.
+
+**Assets** (all in-repo, verified): `public/videos/clinic-hero.{mp4,webm}` + `clinic-hero-720.mp4` (encoded from the clinic's `hero-intro.webm`, played forward then reversed → ~19.8 s seamless loop; source kept alongside), `public/images/clinic-hero-poster.webp`, `skin-care.webp` (Pexels 8923173), `hair-care.webp` (Pexels 23349902), `dental-care.webp` (Pexels 6627574). Pexels licence: free for commercial use, no attribution required. Replace with the clinic's own film and photography when available — paths live in `src/content/clinic.js` (`clinic.media.heroVideo`, `hero.panels`).
+
+**Entrance (lg+, one GSAP timeline, `power3/power4.out`, 0.6–1.1 s beats):** header → eyebrow → ECG line draws → headline lines rise through masks → copy → CTAs (stagger) → location → panels slide in from the right (stagger) → panel labels → scroll cue. The panel images settle in from a 1.16× zoom and a single diagonal light sweep crosses each one; afterwards they drift on a 16–22 s alternating Ken Burns loop (scale 1.07, ~1% pan, yoyo). Afterwards the ECG line softly breathes every ~4 s (no flashing). On scroll the content lifts and fades faster than the film; the panels stay fixed (no scroll or cursor parallax) and run the full hero height. Panel images enter with a top-down curtain wipe plus a zoom settle and then hold still (no continuous zoom); a light sweep crosses the three panels every ~7 s. On hover/focus a panel widens (`flex-grow` 1 → 1.7) and its icon lifts. Below lg a single staggered fade-up runs instead. Reduced motion: nothing animates and the film stays on its poster.
+
+**Film-timed copy:** the hero copy steps aside while the source clip is between 2 s and 6 s, on both the forward and the reversed pass (loop times 2–6 s and 13.8–17.8 s), then animates back in. Out: CTAs, copy, headline (rising out of its masks), eyebrow; the legibility shade fades with it. In: the reverse, like the entrance. Starts only after the entrance; never hides while the copy is hovered or focused; inactive when the film isn't playing. Window constants live at the top of `HeroSection.jsx`.
 
 Micro-interactions use 200–300 ms colour and border transitions only. Nothing scales on hover, so layout never shifts.
 

@@ -7,23 +7,25 @@
    ------------------------------------------------------------------ */
 @theme {
   --color-paper-50: #ffffff;
-  --color-paper-100: #f7f8fb;
-  --color-paper-200: #eef1f7;
-  --color-paper-300: #dfe4ee;
+  --color-paper-100: #f7f9fc;
+  --color-paper-200: #e8edf5;
+  --color-paper-300: #d8dfec;
 
   --color-crimson-100: #fcecec;
   --color-crimson-200: #f6cdcf;
   --color-crimson-300: #eb9ca1;
-  --color-crimson-400: #d64952;
-  --color-crimson-500: #ad0407; /* logo red */
-  --color-crimson-600: #9a0a10; /* accent text, 7.6:1 on paper-100 */
-  --color-crimson-700: #6f0205; /* logo deep red */
+  --color-crimson-400: #d62835; /* bright red */
+  --color-crimson-500: #b20d18; /* medical red: primary CTA */
+  --color-crimson-600: #9c0b15; /* accent text, 7.4:1 on paper-100 */
+  --color-crimson-700: #7a0810;
 
-  --color-navy-600: #2c4a8a;
-  --color-navy-700: #213c75;
-  --color-navy-800: #162c5d; /* logo navy */
-  --color-navy-900: #122451; /* primary text / dark surfaces */
-  --color-navy-950: #0a1633;
+  --color-navy-600: #3b5ba3;
+  --color-navy-700: #2f4a86;
+  --color-navy-800: #263e70; /* secondary navy */
+  --color-navy-900: #192d5a; /* primary navy: text & dark surfaces */
+  --color-navy-950: #0f1d3f;
+
+  --color-ink: #17233b; /* dark body text */
 
   --color-blush-100: #fdf1f1;
   --color-blush-200: #f9dadc;
@@ -49,7 +51,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-paper-100 text-navy-900 font-sans antialiased;
+    @apply bg-paper-100 text-ink font-sans antialiased;
     font-size: 1rem;
     line-height: 1.65;
     text-rendering: optimizeLegibility;
@@ -152,3 +154,31 @@
 .hero-fallback-light {
   animation: drift 22s ease-in-out infinite;
 }
+
+/* Trust marquee: two identical copies, slide one copy's width, loop.
+   Reduced motion: animation-name none (the global rule only shortens durations). */
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee var(--marquee-speed, 52s) linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track,
+.marquee[data-paused] .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* Hero scroll cue: a short light travelling down a hairline */
+@keyframes scroll-cue {
+  0%   { transform: translateY(-100%); }
+  60%  { transform: translateY(200%); }
+  100% { transform: translateY(200%); }
+}
+.hero-scroll-cue {
+  animation: scroll-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+

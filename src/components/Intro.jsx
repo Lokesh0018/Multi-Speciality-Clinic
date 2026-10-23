@@ -1,33 +1,17 @@
-import { clinic, trustPoints } from '../content/clinic'
+import { clinic } from '../content/clinic'
 import { MediaFrame } from './ui/primitives'
+import TrustMarquee from './TrustMarquee'
 
 export default function Intro() {
   return (
     <>
-      {/* Trust strip */}
-      <section aria-label="At a glance" className="border-b border-navy-900/[0.07] bg-paper-50">
-        <div className="container-x">
-          <dl className="grid grid-cols-2 lg:grid-cols-4">
-            {trustPoints.map((t, i) => (
-              <div
-                key={i}
-                data-reveal
-                className={`py-8 md:py-10 ${i % 2 ? 'pl-5 md:pl-8' : 'pr-5 md:pr-8'} ${i > 1 ? 'border-t border-navy-900/[0.07] lg:border-t-0' : ''} ${i > 0 ? 'lg:border-l lg:border-navy-900/[0.07] lg:pl-8' : ''} ${i % 2 ? 'border-l border-navy-900/[0.07]' : ''}`}
-              >
-                <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{t.label}</dt>
-                <dd className="mt-2 font-display text-4xl leading-none text-navy-900 md:text-5xl">{t.value}</dd>
-                <dd className="mt-3 text-sm text-muted">{t.detail}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
+      <TrustMarquee />
 
       {/* Editorial introduction */}
       <section id="about" className="py-24 md:py-36">
         <div className="container-x grid items-center gap-14 lg:grid-cols-12 lg:gap-20">
           <div className="relative lg:col-span-6">
-            <MediaFrame src={clinic.media.intro.main} label="Clinic interior · 4:5" alt="Calm, modern clinic treatment room (sample image)" tone="paper" className="aspect-[4/5] shadow-lift" />
+            <MediaFrame src={clinic.media.intro.main} label="Dr. Kimidi Multispeciality Clinic" alt="Dr. Kimidi Multispeciality Clinic interior and consultation room" tone="paper" className="aspect-[4/5] shadow-lift" />
             <MediaFrame
               src={clinic.media.intro.detail}
               label="Detail · 1:1"

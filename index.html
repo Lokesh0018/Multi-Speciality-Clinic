@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#122451" />
+    <meta name="theme-color" content="#192D5A" />
     <title>Dr. Kimidi Multispeciality Clinic — Skin, Hair & Dental Care, Visakhapatnam</title>
     <meta
       name="description"
       content="Dr. Kimidi Multispeciality Clinic brings skin, hair and dental care together in Visakhapatnam, with branches in PM Palem and MVP Colony."
     />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <!-- Hero imagery starts downloading with the HTML, not after JS renders, so the
+         first frame is the poster rather than an empty background -->
+    <link rel="preload" as="image" href="/images/clinic-hero-poster.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/skin-care.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/images/hair-care.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/images/dental-care.webp" type="image/webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

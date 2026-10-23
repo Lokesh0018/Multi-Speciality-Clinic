@@ -26,9 +26,15 @@ export const clinic = {
   ],
 
   media: {
-    logo: '/media/logo-mark.png', // cropped from /media/logo.png
-    // Seamless-loop hero film. Place files in /public/media/.
-    heroVideo: { webm: '/media/hero-loop.webm', mp4: '/media/hero-loop.mp4', poster: '/media/placeholders/hero-poster.jpg' },
+    logo: '/media/logo-mark.webp', // transparent webp
+    // Hero film: encoded from /public/videos/hero-intro.webm (clinic-supplied),
+    // played forward then reversed so it loops without a cut (~19.8 s, no audio).
+    heroVideo: {
+      webm: '/videos/clinic-hero.webm',
+      mp4: '/videos/clinic-hero.mp4',
+      mp4Mobile: '/videos/clinic-hero-720.mp4',
+      poster: '/images/clinic-hero-poster.webp',
+    },
     // Sample stock photography (Pexels licence). Replace with the clinic's own photos.
     intro: { main: '/media/placeholders/clinic-interior.jpg', detail: '/media/placeholders/clinic-detail.jpg' },
     consultation: '/media/placeholders/consultation.jpg',
@@ -36,18 +42,37 @@ export const clinic = {
 }
 
 export const nav = [
+  { label: 'About', href: '#about' },
   { label: 'Specialities', href: '#specialities' },
   { label: 'Doctors', href: '#doctors' },
-  { label: 'Branches', href: '#branches' },
+  { label: 'Locations', href: '#branches' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ]
 
+/** Hero copy and the three specialty panels (stock photography, Pexels licence). */
+export const hero = {
+  eyebrow: 'Skin · Hair · Dental',
+  headline: ['Expert Care.', 'Healthier You.'],
+  accentWord: 'You.',
+  copy: 'Comprehensive skin, hair and dental care with a personal approach to your well-being.',
+  primaryCta: 'Book an Appointment',
+  secondaryCta: 'Explore Our Services',
+  secondaryHref: '#specialities',
+  location: 'PM Palem & MVP Colony, Visakhapatnam',
+  panels: [
+    { id: 'skin', label: 'Skin Care', icon: 'face', src: '/images/skin-care.webp', alt: 'Dermatologist examining a patient’s face in a clinic', position: '52% 38%' },
+    { id: 'hair', label: 'Hair Care', icon: 'follicle', src: '/images/hair-care.webp', alt: 'Clinician examining a patient’s scalp and hair', position: '55% 28%' },
+    { id: 'dental', label: 'Dental Care', icon: 'tooth', src: '/images/dental-care.webp', alt: 'Smiling patient in a dental chair holding a mirror', position: '72% 42%' },
+  ],
+}
+
+/** Scrolling marquee under the hero. `icon` keys map to Lucide icons in TrustMarquee. */
 export const trustPoints = [
-  { value: '03', label: 'Specialities', detail: 'Skin, hair & dental care' },
-  { value: '02', label: 'Branches', detail: 'PM Palem & MVP Colony' },
-  { value: 'WhatsApp', label: 'or phone', detail: 'Simple appointment enquiries' },
-  { value: '[—]', label: '[Verified credential]', detail: '[Add an approved trust marker]' },
+  { icon: 'specialities', title: 'Three specialties', detail: 'Skin, hair and dental care in one clinic.' },
+  { icon: 'branches', title: 'Two branches', detail: 'PM Palem and MVP Colony, Visakhapatnam.' },
+  { icon: 'hours', title: 'Open every day', detail: '9:00 AM – 9:00 PM, seven days a week.' },
+  { icon: 'contact', title: 'Easy to reach', detail: 'Enquire on WhatsApp or call the clinic.' },
 ]
 
 export const specialities = [

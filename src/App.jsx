@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Header from './components/Header'
-import Hero from './components/Hero'
+import HeroSection from './components/hero/HeroSection'
 import Intro from './components/Intro'
 import Specialities from './components/Specialities'
 import Journey from './components/Journey'
@@ -18,10 +18,8 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 /**
  * Motion hooks (all opt-in via data attributes, all disabled under reduced motion):
- *   [data-hero-line]   masked line reveal in the hero headline
- *   [data-hero-fade]   staggered fade-up for hero supporting content
- *   [data-hero-media]  slow push-in of the hero film as you scroll away
- *   [data-reveal]      fade-up once when scrolled into view
+ *   (the hero owns its own intro timeline — see components/Hero.jsx)
+ *   [data-reveal]     fade-up once when scrolled into view
  *   [data-parallax]    gentle vertical drift inside MediaFrame
  */
 export default function App() {
@@ -31,19 +29,6 @@ export default function App() {
     () => {
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const ease = 'expo.out'
-
-        gsap.timeline({ delay: 0.15 })
-          .from('[data-hero-line]', { yPercent: 110, duration: 1.4, ease, stagger: 0.1 })
-          .from('[data-hero-fade]', { autoAlpha: 0, y: 18, duration: 1.1, ease, stagger: 0.08 }, '-=0.9')
-
-        gsap.to('[data-hero-media]', {
-          scale: 1.08,
-          yPercent: 6,
-          ease: 'none',
-          scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true },
-        })
-
         gsap.utils.toArray('[data-reveal]').forEach((el) => {
           gsap.from(el, {
             autoAlpha: 0,
@@ -73,7 +58,7 @@ export default function App() {
       </a>
       <Header />
       <main id="main">
-        <Hero />
+        <HeroSection />
         <Intro />
         <Specialities />
         <Journey />
