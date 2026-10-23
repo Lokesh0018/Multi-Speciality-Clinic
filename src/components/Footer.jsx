@@ -4,9 +4,53 @@ import { linkProps, telHref, whatsappHref } from '../lib/links'
 import { Wordmark } from './Header'
 import { WhatsAppIcon } from './ui/primitives'
 
+/**
+ * Heart-rate trace across the footer: six beats over a 1440-wide strip. Each
+ * beat is a flat baseline broken by a sharp, straight-edged QRS spike: a small
+ * Q dip, a tall R peak, a deep S trough, then back to baseline.
+ */
+const BEATS = (() => {
+  let d = 'M0 60'
+  for (let x0 = 0; x0 < 1440; x0 += 240) {
+    d += ` L${x0 + 96} 60 L${x0 + 102} 68 L${x0 + 110} 12 L${x0 + 118} 86 L${x0 + 125} 60 L${x0 + 240} 60`
+  }
+  return d
+})()
+
+/**
+ * Footer background: faint ECG graph paper plus a heart-rate line. The trace
+ * is drawn faintly in full; a bright glowing pulse sweeps along it like a
+ * monitor. Reduced motion keeps only the static trace.
+ */
+function HeartbeatBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {/* ECG paper */}
+      <div className="absolute inset-0 opacity-70 [background-image:linear-gradient(rgb(214_40_53/0.06)_1px,transparent_1px),linear-gradient(90deg,rgb(214_40_53/0.06)_1px,transparent_1px),linear-gradient(rgb(214_40_53/0.035)_1px,transparent_1px),linear-gradient(90deg,rgb(214_40_53/0.035)_1px,transparent_1px)] [background-size:80px_80px,80px_80px,16px_16px,16px_16px] [mask-image:radial-gradient(70%_70%_at_50%_55%,#000,transparent)]" />
+      {/* trace */}
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="xMidYMid slice" className="absolute inset-x-0 top-[46%] h-32 w-full -translate-y-1/2 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)] md:h-40">
+        <path d={BEATS} fill="none" stroke="var(--color-crimson-500)" strokeOpacity="0.14" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <path
+          d={BEATS}
+          pathLength="1000"
+          fill="none"
+          stroke="var(--color-crimson-500)"
+          strokeOpacity="0.75"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          strokeDasharray="110 890"
+          className="hidden drop-shadow-[0_0_6px_rgb(214_40_53/0.8)] motion-safe:inline motion-safe:animate-[ecg-sweep_6s_linear_infinite]"
+        />
+      </svg>
+    </div>
+  )
+}
+
 export default function Footer() {
   return (
-    <footer className="pb-28 pt-20 md:pb-12">
+    <footer className="relative isolate overflow-hidden pb-28 pt-20 md:pb-12">
+      <HeartbeatBackdrop />
       <div className="container-x">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -45,9 +89,6 @@ export default function Footer() {
         <div className="hairline mt-16" />
         <div className="mt-8 flex flex-col gap-4 text-sm text-muted md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} {clinic.name}. All rights reserved.</p>
-          <p className="max-w-xl md:text-right">
-            Information on this website is general in nature and is not a substitute for a consultation with a qualified doctor.
-          </p>
         </div>
       </div>
     </footer>
