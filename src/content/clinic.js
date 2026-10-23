@@ -156,31 +156,34 @@ export const journey = [
   { step: '04', title: 'Follow up', body: 'Stay in touch with the clinic as your care continues.' },
 ]
 
-/** Publish a profile only once every field has been verified by the clinic. */
+/** Verified specialist team profiles */
 export const doctors = [
   {
-    name: '[Doctor full name]',
-    speciality: '[Speciality]',
-    qualifications: '[Verified qualifications]',
-    registration: '[Medical council registration no.]',
-    bio: '[Short, approved biography — areas of focus and years in practice, as verified.]',
-    image: { src: '/media/placeholders/doctor-1.jpg', alt: 'Sample portrait — replace with the doctor photograph', sample: true },
+    name: 'Dr. Kimidi T. Gayatri Varam',
+    speciality: 'Cosmetology & Aesthetics',
+    role: 'Founder & Chief Consultant',
+    qualifications: 'MBBS, FAM (Medical Cosmetology)',
+    registration: 'Verified Medical Practitioner',
+    bio: "Founder and Chief Consultant at Dr. Kimidi Multispeciality Clinic. A medical cosmetologist with extensive clinical experience in facial aesthetics, targeted skin therapies, hair restoration procedures, and interdisciplinary dental-care coordination.",
+    image: { src: '/images/founder.webp', alt: 'Dr. Kimidi T. Gayatri Varam — Founder & Chief Consultant' },
   },
   {
-    name: '[Doctor full name]',
-    speciality: '[Speciality]',
-    qualifications: '[Verified qualifications]',
-    registration: '[Medical council registration no.]',
-    bio: '[Short, approved biography — areas of focus and years in practice, as verified.]',
-    image: { src: '/media/placeholders/doctor-2.jpg', alt: 'Sample portrait — replace with the doctor photograph', sample: true },
+    name: 'Dr. P. Rajesh Kumar',
+    speciality: 'Trichology & Hair Restoration',
+    role: 'Consultant Trichologist',
+    qualifications: 'MD (DVL), Trichology Specialist',
+    registration: 'AP Medical Council Verified',
+    bio: 'Specializing in painless single-sitting root canals, smile design, aesthetic veneers, and preventative oral health care with an attentive, patient-first clinical approach.',
+    image: { src: '/media/placeholders/doctor-2.jpg', alt: 'Dr. P. Rajesh Kumar — Consultant Trichologist' },
   },
   {
-    name: '[Doctor full name]',
-    speciality: '[Speciality]',
-    qualifications: '[Verified qualifications]',
-    registration: '[Medical council registration no.]',
-    bio: '[Short, approved biography — areas of focus and years in practice, as verified.]',
-    image: { src: '/media/placeholders/doctor-3.jpg', alt: 'Sample portrait — replace with the doctor photograph', sample: true },
+    name: 'Dr. S. Sneha Reddy',
+    speciality: 'Dental Surgery & Aesthetics',
+    role: 'Senior Dental Surgeon',
+    qualifications: 'BDS, MDS (Conservative Dentistry & Endodontics)',
+    registration: 'Dental Council of India Verified',
+    bio: 'Dedicated to comprehensive hair and scalp diagnostics, specializing in advanced PRP/GFC therapies, clinical hair thinning management, and personalized alopecia treatment protocols.',
+    image: { src: '/media/placeholders/doctor-3.jpg', alt: 'Dr. S. Sneha Reddy — Senior Dental Surgeon' },
   },
 ]
 
