@@ -1,8 +1,8 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { ArrowRight, CalendarCheck, ClipboardList, Clock, MessageCircle, Stethoscope } from 'lucide-react'
+import { ArrowRight, CalendarCheck, Check, ClipboardList, Clock, MessageCircle, Stethoscope } from 'lucide-react'
 import { clinic, journey } from '../content/clinic'
 import { linkProps, whatsappHref } from '../lib/links'
 import { MediaFrame, SectionHeading, WhatsAppIcon } from './ui/primitives'
@@ -24,6 +24,7 @@ const ECG = 'M0 10 H40 L46 10 L50 3 L55 17 L60 6 L64 10 H120'
  */
 export default function Journey() {
   const root = useRef(null)
+  const [current, setCurrent] = useState(-1) // index of the latest step reached
 
   useGSAP(
     () => {
@@ -35,9 +36,29 @@ export default function Journey() {
       // Nodes are evenly spaced along the rail, so step i lights once the fill
       // has covered i / (n - 1) of it; the first lights as soon as it begins
       let pinned = false // while pinned, step 1 is lit from the start
+      const head = q('[data-rail-head]')[0]
+      let last = -2
       const sync = () => {
         const p = gsap.getProperty(fill, 'scaleY')
-        steps.forEach((el, i) => el.toggleAttribute('data-on', (i === 0 && pinned) || (p > 0.001 && p >= i / (steps.length - 1) - 0.02)))
+        let cur = -1
+        steps.forEach((el, i) => {
+          const on = (i === 0 && pinned) || (p > 0.001 && p >= i / (steps.length - 1) - 0.02)
+          el.toggleAttribute('data-on', on)
+          if (on) cur = i
+        })
+        // once the path is complete every step is done, the last one included
+        const done = p >= 0.999
+        steps.forEach((el, i) => {
+          el.toggleAttribute('data-current', i === cur && !done)
+          if (i === cur) el.setAttribute('aria-current', 'step')
+          else el.removeAttribute('aria-current')
+        })
+        // glowing dot rides the leading edge of the fill
+        gsap.set(head, { y: p * fill.offsetHeight, autoAlpha: p > 0.001 && p < 0.999 ? 1 : 0 })
+        if (cur !== last) {
+          last = cur
+          setCurrent(cur)
+        }
       }
 
       // Desktop: the section pins at the top of the screen and scrolling drives
@@ -80,8 +101,9 @@ export default function Journey() {
       })
 
       mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set(q('[data-rail-fill]'), { scaleY: 1 })
+        gsap.set(fill, { scaleY: 1 })
         steps.forEach((el) => el.setAttribute('data-on', ''))
+        setCurrent(steps.length - 1)
       })
     },
     { scope: root },
@@ -152,12 +174,24 @@ export default function Journey() {
           {/* Timeline */}
           <div className="lg:col-span-7">
             <div data-reveal className="mb-6 flex items-center gap-4">
-              <svg viewBox="0 0 120 20" className="h-5 w-24 shrink-0 overflow-visible" aria-hidden="true">
+              <svg viewBox="0 0 120 20" className="h-5 w-20 shrink-0 overflow-visible" aria-hidden="true">
                 <path d={ECG} fill="none" stroke="var(--color-crimson-400)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blush-300">
-                {journey.length} steps · one conversation at a time
+                Step{' '}
+                <span key={current} className="inline-block font-display text-base tracking-normal text-paper-50 motion-safe:animate-[caption-in_0.45s_var(--ease-cinematic)_both]">
+                  {String(Math.max(current, 0) + 1).padStart(2, '0')}
+                </span>
+                <span className="text-paper-50/40"> / {String(journey.length).padStart(2, '0')}</span>
               </p>
+              {/* segmented progress */}
+              <span aria-hidden="true" className="ml-auto hidden w-40 gap-1.5 sm:flex">
+                {journey.map((j, i) => (
+                  <span key={j.step} className="h-1 flex-1 overflow-hidden rounded-full bg-paper-50/[0.12]">
+                    <span className={`block h-full origin-left rounded-full bg-gradient-to-r from-crimson-400 to-blush-300 transition-transform duration-500 ease-[var(--ease-cinematic)] ${i <= current ? 'scale-x-100' : 'scale-x-0'}`} />
+                  </span>
+                ))}
+              </span>
             </div>
 
             <ol data-timeline className="relative space-y-3 lg:space-y-4">
@@ -167,6 +201,11 @@ export default function Journey() {
                 data-rail-fill
                 aria-hidden="true"
                 className="absolute bottom-10 left-[1.6rem] top-10 w-px origin-top bg-gradient-to-b from-crimson-400 via-crimson-400 to-blush-300 shadow-[0_0_12px_rgb(214_40_53/0.7)] md:left-[1.85rem]"
+              />
+              <span
+                data-rail-head
+                aria-hidden="true"
+                className="invisible absolute left-[1.6rem] top-10 z-[5] -ml-[5px] -mt-[5px] size-[11px] rounded-full bg-paper-50 shadow-[0_0_0_4px_rgb(214_40_53/0.35),0_0_18px_4px_rgb(214_40_53/0.8)] md:left-[1.85rem]"
               />
 
               {journey.map((j, i) => {
@@ -178,13 +217,19 @@ export default function Journey() {
                       <span className="font-display text-xl font-semibold text-blush-300 transition-colors duration-500 group-data-[on]:text-paper-50 md:text-2xl">
                         {j.step}
                       </span>
+                      {/* current step: soft expanding ring */}
+                      <span aria-hidden="true" className="absolute inset-0 hidden rounded-full ring-2 ring-crimson-400/70 group-data-[current]:block motion-safe:group-data-[current]:animate-[node-pulse_2.2s_ease-out_infinite]" />
+                      {/* completed step: check badge */}
+                      <span aria-hidden="true" className="absolute -right-1 -top-1 grid size-5 scale-0 place-items-center rounded-full bg-paper-50 text-crimson-600 shadow-md transition-transform duration-300 ease-[var(--ease-cinematic)] group-data-[on]:group-not-data-[current]:scale-100">
+                        <Check className="size-3" strokeWidth={3} />
+                      </span>
                     </span>
 
                     {/* card */}
-                    <div className="relative overflow-hidden rounded-2xl border border-paper-50/[0.09] bg-paper-50/[0.04] px-5 py-4 transition-[background-color,border-color,transform] duration-300 ease-[var(--ease-cinematic)] group-hover:border-paper-50/20 group-hover:bg-paper-50/[0.07] group-data-[on]:border-paper-50/[0.16] md:px-6 md:py-5 lg:group-hover:translate-x-1">
+                    <div className="relative overflow-hidden rounded-2xl border border-paper-50/[0.09] bg-paper-50/[0.04] px-5 py-4 transition-[background-color,border-color,transform,box-shadow] duration-500 ease-[var(--ease-cinematic)] group-hover:border-paper-50/20 group-hover:bg-paper-50/[0.07] group-data-[on]:border-paper-50/[0.16] group-data-[current]:border-crimson-400/45 group-data-[current]:bg-paper-50/[0.09] group-data-[current]:shadow-[0_24px_48px_-24px_rgb(0_0_0/0.6)] md:px-6 md:py-5 lg:group-hover:translate-x-1">
                       <span aria-hidden="true" className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-gradient-to-b from-crimson-400 to-blush-300 transition-transform duration-500 ease-[var(--ease-cinematic)] group-data-[on]:scale-y-100" />
                       <div className="flex items-start gap-4 md:items-center md:gap-5">
-                        <span className="hidden size-11 shrink-0 place-items-center rounded-xl bg-navy-800 text-blush-300 ring-1 ring-paper-50/15 transition-colors duration-300 group-hover:bg-paper-50 group-hover:text-crimson-600 sm:grid">
+                        <span className="hidden size-11 shrink-0 place-items-center rounded-xl bg-navy-800 text-blush-300 ring-1 ring-paper-50/15 transition-colors duration-300 group-hover:bg-paper-50 group-hover:text-crimson-600 group-data-[current]:bg-paper-50 group-data-[current]:text-crimson-600 sm:grid">
                           <Icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
                         </span>
                         <div className="min-w-0 flex-1">
