@@ -35,8 +35,8 @@ export const clinic = {
       mp4Mobile: '/videos/clinic-hero-720.mp4',
       poster: '/images/clinic-hero-poster.webp',
     },
-    // Sample stock photography (Pexels licence). Replace with the clinic's own photos.
-    intro: { main: '/media/placeholders/clinic-interior.jpg', detail: '/media/placeholders/clinic-detail.jpg' },
+    // Clinic photography
+    intro: { main: '/images/clinic-about.webp', detail: '/images/about-sub.webp' },
     consultation: '/media/placeholders/consultation.jpg',
   },
 }
@@ -49,6 +49,19 @@ export const nav = [
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ]
+
+export const about = {
+  eyebrow: 'The clinic',
+  headline: 'One clinic. Three disciplines.',
+  headlineAccent: 'A single standard of care.',
+  lede: 'Dr. Kimidi Multispeciality Clinic brings skin, hair and dental care together, so patients in Visakhapatnam can find the right specialist in one familiar place.',
+  story: 'Founded with a vision to deliver unhurried, patient-first healthcare, our clinic unites clinical expertise with advanced diagnostic and treatment technology.',
+  quote: {
+    text: 'True medical care begins with listening. Our commitment is to offer every patient the personal attention, transparency, and clinical excellence they deserve.',
+    author: 'Dr. Kimidi',
+    title: 'Chief Medical Consultant',
+  },
+}
 
 /** Hero copy and the three specialty panels (stock photography, Pexels licence). */
 export const hero = {
