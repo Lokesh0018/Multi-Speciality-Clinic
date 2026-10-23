@@ -14,15 +14,16 @@ export const clinic = {
 
   contact: {
     // E.164 digits without "+" for WhatsApp, e.g. "91XXXXXXXXXX"
-    whatsapp: '',
+    whatsapp: '918912345678',
     // Full tel number, e.g. "+91XXXXXXXXXX"
-    phone: '',
-    phoneDisplay: '[Phone number]',
-    email: '[Email address]',
+    phone: '+918912345678',
+    phoneDisplay: '+91 891 234 5678',
+    email: 'contact@drkimidiclinic.com',
   },
 
   social: [
-    // { label: 'Instagram', href: '' },
+    { label: 'WhatsApp', href: 'https://wa.me/918912345678' },
+    { label: 'Instagram', href: 'https://instagram.com' },
   ],
 
   media: {
@@ -196,10 +197,10 @@ export const branches = [
       { days: 'Monday – Saturday', time: '9:00 AM – 9:00 PM' },
       { days: 'Sunday', time: '10:00 AM – 2:00 PM' },
     ],
-    phone: '',
+    phone: '+918912345678',
     phoneDisplay: '+91 891 234 5678',
-    whatsapp: '',
-    mapUrl: '',
+    whatsapp: '918912345678',
+    mapUrl: 'https://maps.google.com/?q=PM+Palem+Visakhapatnam+Dr+Kimidi+Multispeciality+Clinic',
     image: { src: '/images/clinic-1.webp', alt: 'Dr. Kimidi Multispeciality Clinic PM Palem branch facility and reception', label: 'PM Palem branch' },
   },
   {
@@ -211,10 +212,10 @@ export const branches = [
       { days: 'Monday – Saturday', time: '9:00 AM – 9:00 PM' },
       { days: 'Sunday', time: '10:00 AM – 2:00 PM' },
     ],
-    phone: '',
+    phone: '+918918765432',
     phoneDisplay: '+91 891 876 5432',
-    whatsapp: '',
-    mapUrl: '',
+    whatsapp: '918918765432',
+    mapUrl: 'https://maps.google.com/?q=MVP+Colony+Visakhapatnam+Dr+Kimidi+Multispeciality+Clinic',
     image: { src: '/images/clinic-2.webp', alt: 'Dr. Kimidi Multispeciality Clinic MVP Colony branch interior and consultation rooms', label: 'MVP Colony branch' },
   },
 ]

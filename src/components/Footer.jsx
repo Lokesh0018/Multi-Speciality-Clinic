@@ -1,4 +1,4 @@
-import { Phone } from 'lucide-react'
+import { Mail, Phone } from 'lucide-react'
 import { branches, clinic, nav, specialities } from '../content/clinic'
 import { linkProps, telHref, whatsappHref } from '../lib/links'
 import { Wordmark } from './Header'
@@ -19,6 +19,11 @@ export default function Footer() {
               <a {...linkProps(telHref())} aria-label="Call the clinic" className="grid size-11 cursor-pointer place-items-center rounded-full border border-navy-900/15 transition-colors hover:bg-navy-900 hover:text-paper-50">
                 <Phone className="size-4" aria-hidden="true" />
               </a>
+              {clinic.contact.email && (
+                <a href={`mailto:${clinic.contact.email}`} aria-label={`Email ${clinic.contact.email}`} className="grid size-11 cursor-pointer place-items-center rounded-full border border-navy-900/15 transition-colors hover:bg-navy-900 hover:text-paper-50">
+                  <Mail className="size-4" aria-hidden="true" />
+                </a>
+              )}
             </div>
           </div>
           <FooterCol title="Explore" items={nav.map((n) => ({ label: n.label, href: n.href }))} className="lg:col-span-2" />
