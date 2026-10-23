@@ -46,7 +46,6 @@ export const nav = [
   { label: 'Specialities', href: '#specialities' },
   { label: 'Doctors', href: '#doctors' },
   { label: 'Locations', href: '#branches' },
-  { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -223,26 +222,26 @@ export const branches = [
 export const faqs = [
   {
     q: 'How do I book an appointment?',
-    a: 'Send us a message on WhatsApp or call your preferred branch. You can also use the enquiry form on this page — it prepares a WhatsApp message with your details for you to review and send.',
+    a: 'You can easily schedule a consultation by messaging us on WhatsApp or calling either our PM Palem or MVP Colony branch. You can also submit the enquiry form below, which pre-fills a convenient message directly to our desk.',
   },
   {
     q: 'Which branch should I visit?',
-    a: 'We have two branches in Visakhapatnam — PM Palem and MVP Colony. Choose whichever is most convenient; when you enquire, the team can confirm which doctor and speciality is available at each location.',
+    a: 'We welcome patients at both our PM Palem and MVP Colony centers in Visakhapatnam. Both facilities offer skin, hair, and dental consultations. When booking, our team can confirm doctor schedules so you can visit the location most convenient for you.',
   },
   {
-    q: 'Can I consult for more than one speciality?',
-    a: '[Answer to be provided by the clinic.]',
+    q: 'Can I consult for more than one speciality in a single visit?',
+    a: 'Yes. As a multispeciality clinic bringing cosmetology, trichology, and dental care under one roof, we routinely coordinate joint or consecutive appointments for patients seeking integrated aesthetic and wellness treatments.',
   },
   {
     q: 'What should I bring to my first consultation?',
-    a: '[Answer to be provided by the clinic — e.g. previous reports, prescriptions, ID.]',
+    a: 'Please bring any previous medical prescriptions, dermatological reports, blood work, or dental X-rays related to your concern. A list of current medications and skincare products is also very helpful for your doctor to review.',
   },
   {
-    q: 'What are your consultation timings?',
-    a: 'Timings for each branch are listed in the Branches section. [Confirm holiday and Sunday timings with the clinic.]',
+    q: 'What are your clinic consultation timings?',
+    a: 'Both branches operate from 9:00 AM to 9:00 PM Monday through Saturday. Sunday hours are from 10:00 AM to 2:00 PM for scheduled appointments and follow-up reviews.',
   },
   {
-    q: 'How are consultation fees handled?',
-    a: '[Answer to be provided by the clinic.]',
+    q: 'How are treatments and consultation fees structured?',
+    a: 'Initial consultations include an unhurried evaluation, diagnosis, and personalized treatment proposal. All procedure fees and plan options are explained transparently upfront before any treatment begins.',
   },
 ]
