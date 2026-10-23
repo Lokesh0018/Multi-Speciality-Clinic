@@ -37,11 +37,6 @@ export default function Doctors() {
                 <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 rounded-b-[1.4rem] bg-gradient-to-t from-navy-950/70 to-transparent" />
 
                 {/* Stock portraits must never be mistaken for the clinic's doctors */}
-                {d.image.sample && (
-                  <span className="absolute left-3 top-3 rounded-full bg-paper-50/90 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-navy-800 backdrop-blur-sm">
-                    Sample photo
-                  </span>
-                )}
                 <span aria-hidden="true" className="absolute right-4 top-3 font-display text-3xl leading-none text-paper-50/90 [text-shadow:0_2px_12px_rgb(15_29_63/0.4)]">
                   {String(i + 1).padStart(2, '0')}
                 </span>

@@ -37,7 +37,7 @@ export const clinic = {
     },
     // Clinic photography
     intro: { main: '/images/clinic-about.webp', detail: '/images/about-sub.webp' },
-    consultation: '/media/placeholders/consultation.jpg',
+    consultation: '/images/visit.webp',
   },
 }
 
@@ -88,6 +88,10 @@ export const trustPoints = [
   { icon: 'contact', title: 'Easy to reach', detail: 'Enquire on WhatsApp or call the clinic.' },
 ]
 
+/**
+ * Each service has its own photo (Pexels licence, replaceable) shown when the
+ * service is selected in the Specialities section.
+ */
 export const specialities = [
   {
     id: 'skin',
@@ -96,8 +100,15 @@ export const specialities = [
     kicker: 'Dermatology',
     summary:
       'Consultation-led care for skin concerns, beginning with a careful assessment and an unhurried conversation about your options.',
-    services: ['[Service name]', '[Service name]', '[Service name]', '[Service name]'],
-    image: { src: '/media/placeholders/skin.jpg', alt: 'Dermatologist examining skin with a dermatoscope', label: 'Skin consultation · 4:5' },
+    services: [
+      { name: 'Acne & Scar Treatments', image: '/images/services/skin-acne.webp', alt: 'Young woman with acne receiving a targeted skin treatment' },
+      { name: 'Pigmentation & Melasma', image: '/images/services/skin-pigmentation.webp', alt: 'Close-up of facial skin with pigmentation marks' },
+      { name: 'Anti-Ageing & Rejuvenation', image: '/images/services/skin-anti-ageing.webp', alt: 'Clinician assessing a mature patient’s face for rejuvenation' },
+      { name: 'Laser Skin Treatments', image: '/images/services/skin-laser.webp', alt: 'Patient in protective goggles receiving a laser skin treatment' },
+      { name: 'Eczema & Allergy Care', image: '/images/services/skin-eczema.webp', alt: 'Dermatologist examining a patient’s skin at a consultation' },
+      { name: 'Chemical Peels & Medi-Facials', image: '/images/services/skin-peels.webp', alt: 'Patient receiving a professional facial treatment' },
+    ],
+    image: { src: '/images/skin-care.webp', alt: 'Dermatologist examining a patient’s face in a clinic', label: 'Dermatology suite' },
     tone: 'crimson',
   },
   {
@@ -107,8 +118,15 @@ export const specialities = [
     kicker: 'Hair & Scalp',
     summary:
       'Thoughtful evaluation of hair and scalp concerns, with suitable approaches explained clearly at your consultation.',
-    services: ['[Service name]', '[Service name]', '[Service name]', '[Service name]'],
-    image: { src: '/media/placeholders/hair.jpg', alt: 'Close-up of healthy hair in soft light', label: 'Hair assessment · 4:5' },
+    services: [
+      { name: 'Hair Fall & Thinning Therapy', image: '/images/services/hair-fall.webp', alt: 'Hands holding a hairbrush with shed hair' },
+      { name: 'PRP & GFC Hair Treatments', image: '/images/services/hair-prp.webp', alt: 'Clinician administering an injection treatment' },
+      { name: 'Dandruff & Scalp Conditions', image: '/images/services/hair-scalp.webp', alt: 'Scalp serum being applied with a dropper' },
+      { name: 'Alopecia Management', image: '/images/services/hair-alopecia.webp', alt: 'Woman checking her hair in a hand mirror' },
+      { name: 'Laser Hair Stimulation', image: '/images/services/hair-laser.webp', alt: 'Patient receiving a scalp treatment at a clinic' },
+      { name: 'Hair Density Restoration', image: '/images/services/hair-density.webp', alt: 'Woman with long, dense, healthy hair' },
+    ],
+    image: { src: '/images/hair-care.webp', alt: 'Clinician examining a patient’s scalp and hair', label: 'Trichology care' },
     tone: 'blush',
   },
   {
@@ -118,8 +136,15 @@ export const specialities = [
     kicker: 'Dentistry',
     summary:
       'Calm, attentive dental care for everyday oral health and smile concerns, in a setting designed to put you at ease.',
-    services: ['[Service name]', '[Service name]', '[Service name]', '[Service name]'],
-    image: { src: '/media/placeholders/dental.jpg', alt: 'Modern dental treatment room with a navy dental chair', label: 'Dental suite · 4:5' },
+    services: [
+      { name: 'Root Canal Treatment', image: '/images/services/dental-root-canal.webp', alt: 'Dentist performing a procedure on a patient' },
+      { name: 'Smile Design & Veneers', image: '/images/services/dental-veneers.webp', alt: 'Dentist matching a veneer shade guide to a smiling patient' },
+      { name: 'Teeth Whitening & Cleaning', image: '/images/services/dental-whitening.webp', alt: 'Close-up of a bright, healthy smile' },
+      { name: 'Dental Implants & Crowns', image: '/images/services/dental-implants.webp', alt: 'Model of a dental implant beside natural teeth' },
+      { name: 'Orthodontics & Aligners', image: '/images/services/dental-ortho.webp', alt: 'Close-up of braces being adjusted' },
+      { name: 'Preventive Oral Healthcare', image: '/images/services/dental-preventive.webp', alt: 'Patient at a routine dental check-up' },
+    ],
+    image: { src: '/images/dental-care.webp', alt: 'Smiling patient in a dental chair holding a mirror', label: 'Dental suite' },
     tone: 'navy',
   },
 ]
