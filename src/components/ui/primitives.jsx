@@ -24,7 +24,7 @@ const TONES = {
 export function MediaFrame({ src, alt = '', label, tone = 'crimson', className = '', rounded = 'rounded-[1.75rem]', parallax = true }) {
   return (
     <div className={`relative isolate overflow-hidden ${rounded} ${className}`}>
-      <div data-parallax={parallax ? '' : undefined} className="absolute inset-x-0 -inset-y-[8%]">
+      <div data-parallax={parallax ? '' : undefined} className={parallax ? 'absolute inset-x-0 -inset-y-[8%]' : 'absolute inset-0'}>
         {src ? (
           <img src={src} alt={alt} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         ) : (
