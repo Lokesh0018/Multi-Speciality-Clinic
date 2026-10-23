@@ -199,3 +199,8 @@
 @keyframes stamp-spin {
   to { transform: rotate(360deg); }
 }
+
+/* Branches: dashes travel along the route between the two branches */
+@keyframes route-flow {
+  to { stroke-dashoffset: -24; }
+}
