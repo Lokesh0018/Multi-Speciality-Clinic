@@ -36,7 +36,7 @@ export default function HeroSection({ onSelectSpeciality, play = true }) {
   const root = useRef(null)
   const film = useRef(null)
   const intro = useRef(null) // entrance timeline, started by the `play` effect
-  // text cycle: `ready` once the entrance is done; `engaged` while hovered/focused
+  // text cycle: `ready` once the entrance is done; `engaged` while keyboard focus is inside
   const cycle = useRef({ ready: false, engaged: false, hidden: false, video: null, tl: null })
 
   const { contextSafe } = useGSAP(
@@ -143,7 +143,7 @@ export default function HeroSection({ onSelectSpeciality, play = true }) {
   })
 
   // Decide whether the copy should be showing; animate only on a change.
-  // Never hides under a hovering pointer or keyboard focus.
+  // Hides on schedule even under the mouse; only keyboard focus holds it.
   const syncText = () => {
     const c = cycle.current
     if (!c.ready || !c.video) return
@@ -170,26 +170,23 @@ export default function HeroSection({ onSelectSpeciality, play = true }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [play])
 
-  // Hovering or focusing the copy holds it on screen (and brings it back if hidden)
+  // Keyboard focus on the copy holds it on screen (and brings it back if hidden),
+  // so a tabbed-to link never vanishes. Mouse clicks also focus links, so only
+  // :focus-visible (keyboard) focus counts — otherwise a click would pin the copy.
   useEffect(() => {
     const content = root.current?.querySelector('[data-hero-content]')
     if (!content) return
-    const engage = (on) => () => {
+    const engage = (on) => {
       cycle.current.engaged = on
       syncText()
     }
-    const enter = engage(true)
-    const leave = engage(false)
-    const blur = (e) => !content.contains(e.relatedTarget) && leave()
-    content.addEventListener('pointerenter', enter)
-    content.addEventListener('pointerleave', leave)
-    content.addEventListener('focusin', enter)
-    content.addEventListener('focusout', blur)
+    const focusIn = (e) => engage(e.target.matches(':focus-visible'))
+    const focusOut = (e) => !content.contains(e.relatedTarget) && engage(false)
+    content.addEventListener('focusin', focusIn)
+    content.addEventListener('focusout', focusOut)
     return () => {
-      content.removeEventListener('pointerenter', enter)
-      content.removeEventListener('pointerleave', leave)
-      content.removeEventListener('focusin', enter)
-      content.removeEventListener('focusout', blur)
+      content.removeEventListener('focusin', focusIn)
+      content.removeEventListener('focusout', focusOut)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
