@@ -172,17 +172,6 @@
   .marquee-track { animation: none; }
 }
 
-/* Hero scroll cue: a short light travelling down a hairline */
-@keyframes scroll-cue {
-  0%   { transform: translateY(-100%); }
-  60%  { transform: translateY(200%); }
-  100% { transform: translateY(200%); }
-}
-.hero-scroll-cue {
-  animation: scroll-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-
-
 /* Specialities: before/after wipe position (0–100). Registered so the value
    itself transitions, and the clip, divider and labels all ride one curve. */
 @property --ba {

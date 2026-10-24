@@ -6,6 +6,8 @@
  * invented contact details, qualifications, reviews or treatment claims.
  */
 
+import { asset } from '../lib/assets'
+
 export const clinic = {
   name: 'Dr. Kimidi Multispeciality Clinic',
   wordmark: { primary: 'Dr. Kimidi', secondary: 'Multispeciality Clinic' },
@@ -21,24 +23,18 @@ export const clinic = {
     email: 'contact@drkimidiclinic.com',
   },
 
-  social: [
-    { label: 'WhatsApp', href: 'https://wa.me/918912345678' },
-    { label: 'Instagram', href: 'https://instagram.com' },
-  ],
-
   media: {
-    logo: '/media/logo-mark.webp', // transparent webp
-    // Hero film: encoded from /public/videos/hero-intro.webm (clinic-supplied),
-    // played forward then reversed so it loops without a cut (~19.8 s, no audio).
+    logo: asset('media/logo-mark.webp'), // transparent webp
+    // Hero film (clinic-supplied), played forward then reversed so it loops without a cut (~19.8 s, no audio).
     heroVideo: {
-      webm: '/videos/clinic-hero.webm',
-      mp4: '/videos/clinic-hero.mp4',
-      mp4Mobile: '/videos/clinic-hero-720.mp4',
-      poster: '/images/clinic-hero-poster.webp',
+      webm: asset('videos/clinic-hero.webm'),
+      mp4: asset('videos/clinic-hero.mp4'),
+      mp4Mobile: asset('videos/clinic-hero-720.mp4'),
+      poster: asset('images/clinic-hero-poster.webp'),
     },
     // Clinic photography
-    intro: { main: '/images/clinic-about.webp', detail: '/images/about-sub.webp' },
-    consultation: '/images/visit.webp',
+    intro: { main: asset('images/clinic-about.webp'), detail: asset('images/about-sub.webp') },
+    consultation: asset('images/visit.webp'),
   },
 }
 
@@ -74,9 +70,9 @@ export const hero = {
   secondaryHref: '#specialities',
   location: 'PM Palem & MVP Colony, Visakhapatnam',
   panels: [
-    { id: 'skin', label: 'Skin Care', icon: 'face', src: '/images/skin-care.webp', alt: 'Dermatologist examining a patient’s face in a clinic', position: '52% 38%' },
-    { id: 'hair', label: 'Hair Care', icon: 'follicle', src: '/images/hair-care.webp', alt: 'Clinician examining a patient’s scalp and hair', position: '55% 28%' },
-    { id: 'dental', label: 'Dental Care', icon: 'tooth', src: '/images/dental-care.webp', alt: 'Smiling patient in a dental chair holding a mirror', position: '72% 42%' },
+    { id: 'skin', label: 'Skin Care', icon: 'face', src: asset('images/skin-care.webp'), alt: 'Dermatologist examining a patient’s face in a clinic', position: '52% 38%' },
+    { id: 'hair', label: 'Hair Care', icon: 'follicle', src: asset('images/hair-care.webp'), alt: 'Clinician examining a patient’s scalp and hair', position: '55% 28%' },
+    { id: 'dental', label: 'Dental Care', icon: 'tooth', src: asset('images/dental-care.webp'), alt: 'Smiling patient in a dental chair holding a mirror', position: '72% 42%' },
   ],
 }
 
@@ -89,8 +85,8 @@ export const trustPoints = [
 ]
 
 /**
- * Each service has its own photo (Pexels licence, replaceable) shown when the
- * service is selected in the Specialities section.
+ * Each service has an "after" photo and an aligned "before" photo, shown as a
+ * before/after comparison when the service is selected in the Specialities section.
  */
 export const specialities = [
   {
@@ -103,43 +99,42 @@ export const specialities = [
     services: [
       {
         name: 'Acne & Scar Treatments',
-        image: '/images/services/skin-acne-after.webp',
+        image: asset('images/services/skin-acne-after.webp'),
         alt: 'Patient with clear, even skin after acne and scar treatment, during a microneedling session',
-        before: { image: '/images/services/skin-acne-before.webp', alt: 'The same patient before treatment, with active acne and acne scarring on the cheek' },
+        before: { image: asset('images/services/skin-acne-before.webp'), alt: 'The same patient before treatment, with active acne and acne scarring on the cheek' },
       },
       {
         name: 'Pigmentation & Melasma',
-        image: '/images/services/skin-pigmentation-after.webp',
+        image: asset('images/services/skin-pigmentation-after.webp'),
         alt: 'Patient with an even, clear complexion after pigmentation treatment, during a laser session',
-        before: { image: '/images/services/skin-pigmentation-before.webp', alt: 'The same patient before treatment, with melasma patches across the cheek' },
+        before: { image: asset('images/services/skin-pigmentation-before.webp'), alt: 'The same patient before treatment, with melasma patches across the cheek' },
       },
       {
         name: 'Anti-Ageing & Rejuvenation',
-        image: '/images/services/skin-anti-ageing-after.webp',
+        image: asset('images/services/skin-anti-ageing-after.webp'),
         alt: 'Patient with smoother, firmer facial skin after rejuvenation treatment, during a skin-tightening session',
-        before: { image: '/images/services/skin-anti-ageing-before.webp', alt: 'The same patient before treatment, with fine lines and uneven texture on the cheek and jaw' },
+        before: { image: asset('images/services/skin-anti-ageing-before.webp'), alt: 'The same patient before treatment, with fine lines and uneven texture on the cheek and jaw' },
       },
       {
         name: 'Laser Skin Treatments',
-        image: '/images/services/skin-laser-after.webp',
+        image: asset('images/services/skin-laser-after.webp'),
         alt: 'Patient in protective goggles with clear, even skin after laser treatment',
-        before: { image: '/images/services/skin-laser-before.webp', alt: 'The same patient before treatment, with sun spots and uneven tone on the cheek' },
+        before: { image: asset('images/services/skin-laser-before.webp'), alt: 'The same patient before treatment, with sun spots and uneven tone on the cheek' },
       },
       {
         name: 'Eczema & Allergy Care',
-        image: '/images/services/skin-eczema-after.webp',
+        image: asset('images/services/skin-eczema-after.webp'),
         alt: 'Patient’s forearm with calm, clear skin after eczema care',
-        before: { image: '/images/services/skin-eczema-before.webp', alt: 'The same forearm before treatment, with a red, inflamed eczema patch' },
+        before: { image: asset('images/services/skin-eczema-before.webp'), alt: 'The same forearm before treatment, with a red, inflamed eczema patch' },
       },
       {
         name: 'Chemical Peels & Medi-Facials',
-        image: '/images/services/skin-peels-after.webp',
+        image: asset('images/services/skin-peels-after.webp'),
         alt: 'Patient with a fresh, glowing complexion after a chemical peel',
-        before: { image: '/images/services/skin-peels-before.webp', alt: 'The same patient before the result, with a peel solution being brushed onto the face' },
+        before: { image: asset('images/services/skin-peels-before.webp'), alt: 'The same patient before the result, with a peel solution being brushed onto the face' },
       },
     ],
-    image: { src: '/images/skin-care.webp', alt: 'Dermatologist examining a patient’s face in a clinic', label: 'Dermatology suite' },
-    tone: 'crimson',
+    image: { src: asset('images/skin-care.webp'), alt: 'Dermatologist examining a patient’s face in a clinic' },
   },
   {
     id: 'hair',
@@ -151,43 +146,42 @@ export const specialities = [
     services: [
       {
         name: 'Hair Fall & Thinning Therapy',
-        image: '/images/services/hair-fall-after.webp',
+        image: asset('images/services/hair-fall-after.webp'),
         alt: 'Patient with fuller hair along the parting after hair-fall therapy',
-        before: { image: '/images/services/hair-fall-before.webp', alt: 'The same patient before treatment, with visible thinning along the parting' },
+        before: { image: asset('images/services/hair-fall-before.webp'), alt: 'The same patient before treatment, with visible thinning along the parting' },
       },
       {
         name: 'PRP & GFC Hair Treatments',
-        image: '/images/services/hair-prp-after.webp',
+        image: asset('images/services/hair-prp-after.webp'),
         alt: 'Patient with denser hair at the crown after PRP treatment',
-        before: { image: '/images/services/hair-prp-before.webp', alt: 'The same patient before treatment, with thinning at the crown as PRP is injected into the scalp' },
+        before: { image: asset('images/services/hair-prp-before.webp'), alt: 'The same patient before treatment, with thinning at the crown as PRP is injected into the scalp' },
       },
       {
         name: 'Dandruff & Scalp Conditions',
-        image: '/images/services/hair-scalp-after.webp',
+        image: asset('images/services/hair-scalp-after.webp'),
         alt: 'Clear, flake-free scalp under a dermatoscope after scalp treatment',
-        before: { image: '/images/services/hair-scalp-before.webp', alt: 'The same scalp before treatment, with dandruff flakes along the parting' },
+        before: { image: asset('images/services/hair-scalp-before.webp'), alt: 'The same scalp before treatment, with dandruff flakes along the parting' },
       },
       {
         name: 'Alopecia Management',
-        image: '/images/services/hair-alopecia-after.webp',
+        image: asset('images/services/hair-alopecia-after.webp'),
         alt: 'Scalp with regrown hair where the bald patch was, after alopecia management',
-        before: { image: '/images/services/hair-alopecia-before.webp', alt: 'The same scalp before treatment, with a round alopecia patch examined under a dermatoscope' },
+        before: { image: asset('images/services/hair-alopecia-before.webp'), alt: 'The same scalp before treatment, with a round alopecia patch examined under a dermatoscope' },
       },
       {
         name: 'Laser Hair Stimulation',
-        image: '/images/services/hair-laser-after.webp',
+        image: asset('images/services/hair-laser-after.webp'),
         alt: 'Man with fuller hair on top after a course of laser hair stimulation',
-        before: { image: '/images/services/hair-laser-before.webp', alt: 'The same patient before treatment, with thinning on top under a red-light laser cap' },
+        before: { image: asset('images/services/hair-laser-before.webp'), alt: 'The same patient before treatment, with thinning on top under a red-light laser cap' },
       },
       {
         name: 'Hair Density Restoration',
-        image: '/images/services/hair-density-after.webp',
+        image: asset('images/services/hair-density-after.webp'),
         alt: 'Patient with dense hair across the crown after density restoration',
-        before: { image: '/images/services/hair-density-before.webp', alt: 'The same patient before treatment, with sparse hair across the crown' },
+        before: { image: asset('images/services/hair-density-before.webp'), alt: 'The same patient before treatment, with sparse hair across the crown' },
       },
     ],
-    image: { src: '/images/hair-care.webp', alt: 'Clinician examining a patient’s scalp and hair', label: 'Trichology care' },
-    tone: 'blush',
+    image: { src: asset('images/hair-care.webp'), alt: 'Clinician examining a patient’s scalp and hair' },
   },
   {
     id: 'dental',
@@ -199,37 +193,36 @@ export const specialities = [
     services: [
       {
         name: 'Root Canal Treatment',
-        image: '/images/services/root-canal-after.webp',
+        image: asset('images/services/root-canal-after.webp'),
         alt: 'Restored molar with a clean, natural-looking filling after root canal treatment',
-        before: { image: '/images/services/root-canal-before.webp', alt: 'The same molar before treatment, with deep, dark decay in the biting surface' },
+        before: { image: asset('images/services/root-canal-before.webp'), alt: 'The same molar before treatment, with deep, dark decay in the biting surface' },
       },
       {
         name: 'Zirconia Crowns',
-        image: '/images/services/zirconia-crowns-after.webp',
+        image: asset('images/services/zirconia-crowns-after.webp'),
         alt: 'Smile with even, natural-white front teeth after zirconia crowns',
-        before: { image: '/images/services/zirconia-crowns-before.webp', alt: 'The same smile before treatment, with a broken, decayed front tooth and stained neighbours' },
+        before: { image: asset('images/services/zirconia-crowns-before.webp'), alt: 'The same smile before treatment, with a broken, decayed front tooth and stained neighbours' },
       },
       {
         name: 'Smile Designing',
-        image: '/images/services/smile-designing-after.webp',
+        image: asset('images/services/smile-designing-after.webp'),
         alt: 'Bright, evenly shaped smile after smile designing',
-        before: { image: '/images/services/smile-designing-before.webp', alt: 'The same smile before treatment, with yellowed, stained and uneven front teeth' },
+        before: { image: asset('images/services/smile-designing-before.webp'), alt: 'The same smile before treatment, with yellowed, stained and uneven front teeth' },
       },
       {
         name: 'Dental Implants',
-        image: '/images/services/dental-implants-after.webp',
+        image: asset('images/services/dental-implants-after.webp'),
         alt: 'Complete smile with the missing front tooth replaced by an implant',
-        before: { image: '/images/services/dental-implants-before.webp', alt: 'The same smile before treatment, with a gap where an upper front tooth is missing' },
+        before: { image: asset('images/services/dental-implants-before.webp'), alt: 'The same smile before treatment, with a gap where an upper front tooth is missing' },
       },
       {
         name: 'Clear Aligners',
-        image: '/images/services/clear-aligners-after.webp',
+        image: asset('images/services/clear-aligners-after.webp'),
         alt: 'Straight, evenly aligned teeth after clear aligner treatment',
-        before: { image: '/images/services/clear-aligners-before.webp', alt: 'The same smile before treatment, with crooked, crowded lower teeth' },
+        before: { image: asset('images/services/clear-aligners-before.webp'), alt: 'The same smile before treatment, with crooked, crowded lower teeth' },
       },
     ],
-    image: { src: '/images/dental-care.webp', alt: 'Smiling patient in a dental chair holding a mirror', label: 'Dental suite' },
-    tone: 'navy',
+    image: { src: asset('images/dental-care.webp'), alt: 'Smiling patient in a dental chair holding a mirror' },
     frame: 'landscape', // 4:3 photo frame: the dental photos are wide smiles
   },
 ]
@@ -250,7 +243,7 @@ export const doctors = [
     qualifications: 'MBBS, FAM (Medical Cosmetology)',
     registration: 'Verified Medical Practitioner',
     bio: "Founder and Chief Consultant at Dr. Kimidi Multispeciality Clinic. A medical cosmetologist with extensive clinical experience in facial aesthetics, targeted skin therapies, hair restoration procedures, and interdisciplinary dental-care coordination.",
-    image: { src: '/images/founder.webp', alt: 'Dr. Kimidi T. Gayatri Varam — Founder & Chief Consultant' },
+    image: { src: asset('images/founder.webp'), alt: 'Dr. Kimidi T. Gayatri Varam — Founder & Chief Consultant' },
   },
   {
     name: 'Dr. P. Rajesh Kumar',
@@ -259,7 +252,7 @@ export const doctors = [
     qualifications: 'MD (DVL), Trichology Specialist',
     registration: 'AP Medical Council Verified',
     bio: 'Specializing in painless single-sitting root canals, smile design, aesthetic veneers, and preventative oral health care with an attentive, patient-first clinical approach.',
-    image: { src: '/media/placeholders/doctor-2.jpg', alt: 'Dr. P. Rajesh Kumar — Consultant Trichologist' },
+    image: { src: asset('media/placeholders/doctor-2.jpg'), alt: 'Dr. P. Rajesh Kumar — Consultant Trichologist' },
   },
   {
     name: 'Dr. S. Sneha Reddy',
@@ -268,7 +261,7 @@ export const doctors = [
     qualifications: 'BDS, MDS (Conservative Dentistry & Endodontics)',
     registration: 'Dental Council of India Verified',
     bio: 'Dedicated to comprehensive hair and scalp diagnostics, specializing in advanced PRP/GFC therapies, clinical hair thinning management, and personalized alopecia treatment protocols.',
-    image: { src: '/media/placeholders/doctor-3.jpg', alt: 'Dr. S. Sneha Reddy — Senior Dental Surgeon' },
+    image: { src: asset('media/placeholders/doctor-3.jpg'), alt: 'Dr. S. Sneha Reddy — Senior Dental Surgeon' },
   },
 ]
 
@@ -286,7 +279,7 @@ export const branches = [
     phoneDisplay: '+91 891 234 5678',
     whatsapp: '918912345678',
     mapUrl: 'https://maps.google.com/?q=PM+Palem+Visakhapatnam+Dr+Kimidi+Multispeciality+Clinic',
-    image: { src: '/images/clinic-1.webp', alt: 'Dr. Kimidi Multispeciality Clinic PM Palem branch facility and reception', label: 'PM Palem branch' },
+    image: { src: asset('images/clinic-1.webp'), alt: 'Dr. Kimidi Multispeciality Clinic PM Palem branch facility and reception', label: 'PM Palem branch' },
   },
   {
     id: 'mvp-colony',
@@ -301,7 +294,7 @@ export const branches = [
     phoneDisplay: '+91 891 876 5432',
     whatsapp: '918918765432',
     mapUrl: 'https://maps.google.com/?q=MVP+Colony+Visakhapatnam+Dr+Kimidi+Multispeciality+Clinic',
-    image: { src: '/images/clinic-2.webp', alt: 'Dr. Kimidi Multispeciality Clinic MVP Colony branch interior and consultation rooms', label: 'MVP Colony branch' },
+    image: { src: asset('images/clinic-2.webp'), alt: 'Dr. Kimidi Multispeciality Clinic MVP Colony branch interior and consultation rooms', label: 'MVP Colony branch' },
   },
 ]
 

@@ -1,6 +1,6 @@
-import { Mail, Phone } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { branches, clinic, nav, specialities } from '../content/clinic'
-import { linkProps, telHref, whatsappHref } from '../lib/links'
+import { linkProps, mapHref, telHref, whatsappHref } from '../lib/links'
 import { Wordmark } from './Header'
 import { WhatsAppIcon } from './ui/primitives'
 
@@ -49,11 +49,12 @@ function HeartbeatBackdrop() {
 
 export default function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden pb-28 pt-20 md:pb-12">
+    <footer className="relative isolate overflow-hidden pb-[calc(7rem+env(safe-area-inset-bottom))] pt-16 md:pb-12 md:pt-20">
       <HeartbeatBackdrop />
       <div className="container-x">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+        {/* small screens: brand, then the two link lists side by side, then branch cards */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-12 lg:gap-12">
+          <div className="col-span-2 md:col-span-1 lg:col-span-4">
             <Wordmark />
             <p className="mt-6 max-w-xs text-muted">{clinic.specialities} care in {clinic.city}.</p>
             <div className="mt-6 flex gap-2">
@@ -72,22 +73,32 @@ export default function Footer() {
           </div>
           <FooterCol title="Explore" items={nav.map((n) => ({ label: n.label, href: n.href }))} className="lg:col-span-2" />
           <FooterCol title="Specialities" items={specialities.map((s) => ({ label: s.title, href: `#${s.id}` }))} className="lg:col-span-2" />
-          <div className="lg:col-span-4">
+          <div className="col-span-2 md:col-span-1 lg:col-span-4">
             <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">Branches</h2>
-            <ul className="mt-5 grid gap-6 sm:grid-cols-2">
+            <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:gap-6">
               {branches.map((b) => (
-                <li key={b.id}>
+                <li key={b.id} className="rounded-2xl border border-navy-900/[0.08] bg-paper-50/80 p-5 backdrop-blur-sm lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
                   <p className="font-display text-xl">{b.name}</p>
-                  <p className="mt-1 whitespace-pre-line text-sm text-muted">{b.address}</p>
-                  <p className="mt-1 text-sm text-muted">{b.phoneDisplay}</p>
+                  <p className="mt-1.5 whitespace-pre-line text-sm leading-relaxed text-muted">{b.address}</p>
+                  <div className="mt-3 flex flex-wrap gap-x-5 text-sm font-medium">
+                    <a {...linkProps(telHref(b.phone))} className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-navy-800 transition-colors hover:text-crimson-600 lg:min-h-9">
+                      <Phone className="size-4 text-crimson-600" aria-hidden="true" />
+                      {b.phoneDisplay}
+                    </a>
+                    <a {...linkProps(mapHref(b))} className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-navy-800 transition-colors hover:text-crimson-600 lg:min-h-9">
+                      <MapPin className="size-4 text-crimson-600" aria-hidden="true" />
+                      Directions
+                      <span className="sr-only">to {b.name} branch</span>
+                    </a>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="hairline mt-16" />
-        <div className="mt-8 flex flex-col gap-4 text-sm text-muted md:flex-row md:items-center md:justify-between">
+        <div className="hairline mt-12 md:mt-16" />
+        <div className="mt-6 flex flex-col gap-4 text-center text-sm text-muted md:mt-8 md:flex-row md:items-center md:justify-between md:text-left">
           <p>© {new Date().getFullYear()} {clinic.name}. All rights reserved.</p>
         </div>
       </div>
@@ -99,10 +110,10 @@ function FooterCol({ title, items, className }) {
   return (
     <nav aria-label={title} className={className}>
       <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-crimson-600">{title}</h2>
-      <ul className="mt-5 space-y-1">
+      <ul className="mt-4 md:mt-5 md:space-y-1">
         {items.map((i) => (
           <li key={i.href}>
-            <a href={i.href} className="inline-flex min-h-10 cursor-pointer items-center text-navy-800 transition-colors hover:text-crimson-600">
+            <a href={i.href} className="inline-flex min-h-11 cursor-pointer items-center text-navy-800 md:min-h-10 transition-colors hover:text-crimson-600">
               {i.label}
             </a>
           </li>

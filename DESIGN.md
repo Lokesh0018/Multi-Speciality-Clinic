@@ -1,6 +1,6 @@
 # Dr. Kimidi Multispeciality Clinic — Design System
 
-Brand theme from the logo (`public/media/logo.png`): crimson cross and profile, navy tooth, clean white grounds.
+Brand theme from the logo (`src/assets/media/logo-mark.webp`): crimson cross and profile, navy tooth, clean white grounds.
 Stack: React 18 · Vite 6 · Tailwind CSS v4 · GSAP 3 (ScrollTrigger, @gsap/react).
 
 ```bash
@@ -17,11 +17,11 @@ registration numbers, services, addresses, hours and FAQ answers.
 
 - **WhatsApp / phone**: set `clinic.contact.whatsapp` (digits only, e.g. `91XXXXXXXXXX`) and `clinic.contact.phone` (`+91…`).
   Until they're set, every CTA scrolls to `#contact` so no wrong number is ever dialled. Each branch can override them.
-- **Hero film**: add `public/media/hero-loop.webm` and `hero-loop.mp4` (plus an optional `poster`).
+- **Hero film**: lives in `src/assets/videos/` (webm, mp4 and a 720p mp4 for mobile) with its poster in `src/assets/images/`.
   For a seamless loop, export 12–20 s at 1080p with the last frame matching the first (or crossfade the tail into the head), with no audio, under about 6 MB.
   Until then, a slowly drifting forest-and-champagne light scene shows in its place.
-- **Logo**: the header and footer use `public/media/logo-mark.png`, a tight crop of `logo.png`. The artwork has a white background, so it sits on a white tile. A transparent SVG or PNG would let it sit directly on navy.
-- **Sample photography**: `public/media/placeholders/*.jpg` are free stock photos from Pexels (Pexels licence). Doctor portraits carry a visible "Sample photo" badge (`image.sample: true`). Replace all of them with the clinic's own photos before launch.
+- **Logo**: the header and footer use `src/assets/media/logo-mark.webp`, a transparent crop of the logo mark.
+- **Sample photography**: `src/assets/media/placeholders/*.jpg` are free stock photos from Pexels (Pexels licence). Doctor portraits carry a visible "Sample photo" badge (`image.sample: true`). Replace all of them with the clinic's own photos before launch.
 - **Photography**: set `image.src` on specialities, doctors and branches. Frames are fixed at 4:5 (speciality, portrait) and 16:10 (branch).
   Each frame shows a labelled placeholder until it gets an image.
 - **Maps**: set `branch.mapUrl`. Until then, "Directions" runs a Google Maps search for the clinic name and branch.
@@ -73,9 +73,9 @@ With reduced motion on, nothing animates and the hero film shows its poster fram
 
 ### Hero (`src/components/hero/`)
 
-Four layers: `HeroVideo` (poster painted first, film fades in once it plays; hidden on autoplay refusal, source error or reduced motion), a navy gradient strongest on the left, `HeroContent` (eyebrow, ECG line, headline, CTAs, location) and `SpecialtyPanels` — three slanted, overlapping panels (`skewX(-9deg)` outer, counter-skewed image) pinned to the right half at lg+, a three-up card row below lg. `ScrollIndicator` and a film pause/play control sit at the foot.
+Four layers: `HeroVideo` (poster painted first, film fades in once it plays; hidden on autoplay refusal, source error or reduced motion), a navy gradient strongest on the left, `HeroContent` (eyebrow, ECG line, headline, CTAs, location) and `SpecialtyPanels` — three slanted, overlapping panels (`skewX(-9deg)` outer, counter-skewed image) pinned to the right half at lg+, a three-up card row below lg. A film pause/play control sits at the foot.
 
-**Assets** (all in-repo, verified): `public/videos/clinic-hero.{mp4,webm}` + `clinic-hero-720.mp4` (encoded from the clinic's `hero-intro.webm`, played forward then reversed → ~19.8 s seamless loop; source kept alongside), `public/images/clinic-hero-poster.webp`, `skin-care.webp` (Pexels 8923173), `hair-care.webp` (Pexels 23349902), `dental-care.webp` (Pexels 6627574). Pexels licence: free for commercial use, no attribution required. Replace with the clinic's own film and photography when available — paths live in `src/content/clinic.js` (`clinic.media.heroVideo`, `hero.panels`).
+**Assets** (all in-repo, verified): `src/assets/videos/clinic-hero.{mp4,webm}` + `clinic-hero-720.mp4` (encoded from the clinic's film, played forward then reversed → ~19.8 s seamless loop), `src/assets/images/clinic-hero-poster.webp`, `skin-care.webp` (Pexels 8923173), `hair-care.webp` (Pexels 23349902), `dental-care.webp` (Pexels 6627574). Pexels licence: free for commercial use, no attribution required. Replace with the clinic's own film and photography when available — paths live in `src/content/clinic.js` as `asset('…')` calls, resolved by `src/lib/assets.js` (`clinic.media.heroVideo`, `hero.panels`).
 
 **Entrance (lg+, one GSAP timeline, `power3/power4.out`, 0.6–1.1 s beats):** header → eyebrow → ECG line draws → headline lines rise through masks → copy → CTAs (stagger) → location → panels slide in from the right (stagger) → panel labels → scroll cue. The panel images settle in from a 1.16× zoom and a single diagonal light sweep crosses each one; afterwards they drift on a 16–22 s alternating Ken Burns loop (scale 1.07, ~1% pan, yoyo). Afterwards the ECG line softly breathes every ~4 s (no flashing). On scroll the content lifts and fades faster than the film; the panels stay fixed (no scroll or cursor parallax) and run the full hero height. Panel images enter with a top-down curtain wipe plus a zoom settle and then hold still (no continuous zoom); a light sweep crosses the three panels every ~7 s. On hover/focus a panel widens (`flex-grow` 1 → 1.7) and its icon lifts. Below lg a single staggered fade-up runs instead. Reduced motion: nothing animates and the film stays on its poster.
 
