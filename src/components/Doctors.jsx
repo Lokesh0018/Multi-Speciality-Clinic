@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowUpRight, BadgeCheck, GraduationCap, Phone } from 'lucide-react'
-import { clinic, doctors } from '../content/clinic'
+import { about, clinic, doctors } from '../content/clinic'
 import { linkProps, telHref, whatsappHref } from '../lib/links'
 import { MediaFrame, SectionHeading, WhatsAppIcon } from './ui/primitives'
 
@@ -61,6 +61,155 @@ function FounderStamp() {
   )
 }
 
+/** Profile card: portrait, speciality, qualifications, registration and a Book link. */
+function DoctorCard({ d, i, className = '' }) {
+  // the founder's story sits in the spotlight beside the card, so that portrait carries no overlay
+  const overlay = !d.profile
+  return (
+    <article
+      data-reveal
+      aria-label={d.name}
+      className={`card group relative flex flex-col p-2.5 transition-[box-shadow,border-color,translate] duration-500 ease-[var(--ease-cinematic)] hover:-translate-y-1 hover:border-crimson-300/50 hover:shadow-lift focus-within:border-crimson-300/50 focus-within:shadow-lift motion-reduce:hover:translate-y-0 ${className}`}
+    >
+      {d.role?.startsWith('Founder') && <FounderStamp />}
+      {/* Portrait; focusable when it has a description, so keyboard and touch users can open it */}
+      <div
+        tabIndex={overlay ? 0 : undefined}
+        aria-label={overlay ? `About ${d.name}` : undefined}
+        className={`relative rounded-[1.4rem] ${overlay ? 'cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-500' : ''}`}
+      >
+        <MediaFrame
+          src={d.image.src}
+          alt={d.image.alt}
+          label="Portrait · 4:5"
+          tone={['crimson', 'blush', 'paper'][i % 3]}
+          rounded="rounded-[1.4rem]"
+          className="aspect-[4/5]"
+          parallax={false}
+        />
+        <span aria-hidden="true" className="absolute right-3 top-3 grid h-9 min-w-9 place-items-center rounded-full bg-paper-50/95 px-2.5 font-display text-lg leading-none text-navy-900 shadow-soft">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <p className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-paper-50/95 py-1.5 pl-2.5 pr-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-crimson-600 shadow-soft">
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-crimson-500" />
+          {d.speciality}
+        </p>
+        {/* Description overlay: fades in over the portrait on hover / focus */}
+        {overlay && (
+          <div className="absolute inset-0 flex flex-col justify-end overflow-hidden rounded-[1.4rem] bg-gradient-to-t from-navy-950/95 via-navy-950/80 to-navy-950/25 p-5 text-paper-50 opacity-0 transition-opacity duration-500 ease-[var(--ease-cinematic)] group-hover:opacity-100 group-focus-within:opacity-100 md:p-6">
+            <div className="translate-y-4 transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:translate-y-0 group-focus-within:translate-y-0 motion-reduce:translate-y-0 motion-reduce:transition-none">
+              <span aria-hidden="true" className="mb-4 block h-[3px] w-10 rounded-full bg-crimson-500" />
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-blush-300">About</p>
+              <p className="mt-2 text-[0.95rem] leading-relaxed text-paper-50/95">{d.bio}</p>
+            </div>
+          </div>
+        )}
+        {/* crimson accent draws along the portrait's foot on hover/focus */}
+        <span aria-hidden="true" className="absolute inset-x-6 -bottom-px h-[3px] origin-left scale-x-0 rounded-full bg-crimson-500 transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:scale-x-100 group-focus-within:scale-x-100 motion-reduce:transition-none" />
+      </div>
+
+      <div className="flex flex-1 flex-col px-4 pb-3 pt-6">
+        <h3 className="font-display text-[1.85rem] leading-tight text-navy-900">
+          <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size,color] duration-500 ease-[var(--ease-cinematic)] group-hover:bg-[length:100%_1px] group-hover:text-crimson-600">
+            {d.name}
+          </span>
+        </h3>
+        {d.role && (
+          <p className="mt-1 text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-crimson-600">
+            {d.role}
+          </p>
+        )}
+        <p className="mt-2 flex flex-1 items-start gap-2 text-[0.9375rem] font-medium text-navy-700">
+          <GraduationCap className="mt-0.5 size-4 shrink-0 text-crimson-500" aria-hidden="true" />
+          {d.qualifications}
+        </p>
+
+        <div className="mt-6 flex items-center justify-between gap-4 border-t border-navy-900/[0.08] pt-4">
+          <p className="flex min-w-0 items-center gap-2 text-sm text-muted">
+            <BadgeCheck className="size-4 shrink-0 text-crimson-600" aria-hidden="true" />
+            <span className="truncate">
+              <span className="sr-only">Registration: </span>
+              {d.registration}
+            </span>
+          </p>
+          <a
+            {...linkProps(whatsappHref(bookingMessage(d)))}
+            aria-label={`Book a consultation with ${d.name}`}
+            className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-crimson-100 pl-4 pr-3 text-sm font-semibold text-crimson-600 ring-1 ring-crimson-200/80 transition-colors duration-300 hover:bg-crimson-500 hover:text-paper-50 hover:ring-crimson-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-500 group-hover:bg-crimson-500 group-hover:text-paper-50 group-hover:ring-crimson-500"
+          >
+            Book
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+const bookingMessage = (d) => `Hello, I would like to book a consultation with ${d.name} (${d.speciality}).`
+
+/**
+ * Founder spotlight, beside the founder's card: story, areas of focus and the
+ * founder's quote. Light card with a faint oversized quote mark and a crimson
+ * rule down its left edge; spans the rest of the first row at lg.
+ */
+function FounderSpotlight({ d }) {
+  const p = d.profile
+  return (
+    <article
+      data-reveal
+      aria-labelledby="founder-spotlight-title"
+      className="card relative isolate flex flex-col overflow-hidden p-7 md:p-9 lg:col-span-4 lg:p-12"
+    >
+      {/* decor: crimson rule, oversized quote mark, soft brand glow */}
+      <span aria-hidden="true" className="absolute inset-y-10 left-0 w-[3px] rounded-r-full bg-gradient-to-b from-crimson-400 via-crimson-500 to-crimson-500/0 lg:inset-y-12" />
+      <span aria-hidden="true" className="pointer-events-none absolute -right-2 -top-16 -z-10 select-none font-display text-[18rem] leading-none text-blush-200/70 lg:-top-20 lg:text-[22rem]">“</span>
+      <div aria-hidden="true" className="absolute -bottom-32 -right-32 -z-10 size-96 rounded-full bg-[radial-gradient(circle,rgb(214_40_53/0.08),transparent_65%)]" />
+
+      <p className="eyebrow text-crimson-600">{p.eyebrow}</p>
+      <h3 id="founder-spotlight-title" className="display-md mt-4 max-w-xl text-balance text-navy-900">
+        {p.headline} <em className="text-crimson-600">{p.headlineAccent}</em>
+      </h3>
+
+      <div className="mt-6 max-w-2xl space-y-4">
+        {p.story.map((para) => (
+          <p key={para} className="text-pretty text-[1rem] leading-[1.75] text-muted md:text-[1.0625rem]">{para}</p>
+        ))}
+      </div>
+
+      <div className="mt-7">
+        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-navy-800">Areas of focus</p>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {p.focus.map((f) => (
+            <li key={f} className="inline-flex items-center gap-2 rounded-full bg-crimson-100 py-1.5 pl-2.5 pr-3.5 text-[0.85rem] font-semibold text-crimson-700 ring-1 ring-crimson-200/80">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-crimson-500" />
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <figure className="mt-8 border-t border-navy-900/[0.08] pt-7">
+        <blockquote className="font-display text-xl italic leading-snug text-navy-800 lg:text-[1.4rem]">
+          “{about.quote.text}”
+        </blockquote>
+        <figcaption className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+          <span className="flex items-start gap-2 text-[0.9375rem] font-medium text-navy-700">
+            <GraduationCap className="mt-0.5 size-4 shrink-0 text-crimson-500" aria-hidden="true" />
+            <span>
+              <span className="block font-semibold text-navy-900">{d.name}</span>
+              {d.qualifications}
+            </span>
+          </span>
+          <a {...linkProps(whatsappHref(bookingMessage(d)))} className="btn-primary">
+            <WhatsAppIcon className="size-4" /> Book with Dr. Kimidi
+          </a>
+        </figcaption>
+      </figure>
+    </article>
+  )
+}
+
 export default function Doctors() {
   return (
     <section id="doctors" aria-labelledby="doctors-title" className="relative isolate overflow-hidden bg-paper-100 py-24 md:py-36">
@@ -83,85 +232,13 @@ export default function Doctors() {
           </p>
         </div>
 
-        <ul className="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8">
-          {doctors.map((d, i) => (
-            <li
-              key={i}
-              data-reveal
-              className="card group relative flex flex-col p-2.5 transition-[box-shadow,border-color,translate] duration-500 ease-[var(--ease-cinematic)] hover:-translate-y-1 hover:border-crimson-300/50 hover:shadow-lift focus-within:border-crimson-300/50 focus-within:shadow-lift motion-reduce:hover:translate-y-0"
-            >
-              {d.role?.startsWith('Founder') && <FounderStamp />}
-              {/* Portrait; focusable so keyboard and touch users can open the description */}
-              <div
-                tabIndex={0}
-                aria-label={`About ${d.name}`}
-                className="relative cursor-pointer rounded-[1.4rem] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-500"
-              >
-                <MediaFrame
-                  src={d.image.src}
-                  alt={d.image.alt}
-                  label="Portrait · 4:5"
-                  tone={['crimson', 'blush', 'paper'][i % 3]}
-                  rounded="rounded-[1.4rem]"
-                  className="aspect-[4/5]"
-                  parallax={false}
-                />
-                <span aria-hidden="true" className="absolute right-3 top-3 grid h-9 min-w-9 place-items-center rounded-full bg-paper-50/95 px-2.5 font-display text-lg leading-none text-navy-900 shadow-soft">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <p className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-paper-50/95 py-1.5 pl-2.5 pr-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-crimson-600 shadow-soft">
-                  <span aria-hidden="true" className="size-1.5 rounded-full bg-crimson-500" />
-                  {d.speciality}
-                </p>
-                {/* Description overlay: fades in over the portrait on hover / focus */}
-                <div className="absolute inset-0 flex flex-col justify-end overflow-hidden rounded-[1.4rem] bg-gradient-to-t from-navy-950/95 via-navy-950/80 to-navy-950/25 p-5 text-paper-50 opacity-0 transition-opacity duration-500 ease-[var(--ease-cinematic)] group-hover:opacity-100 group-focus-within:opacity-100 md:p-6">
-                  <div className="translate-y-4 transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:translate-y-0 group-focus-within:translate-y-0 motion-reduce:translate-y-0 motion-reduce:transition-none">
-                    <span aria-hidden="true" className="mb-4 block h-[3px] w-10 rounded-full bg-crimson-500" />
-                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-blush-300">About</p>
-                    <p className="mt-2 text-[0.95rem] leading-relaxed text-paper-50/95">{d.bio}</p>
-                  </div>
-                </div>
-                {/* crimson accent draws along the portrait's foot on hover/focus */}
-                <span aria-hidden="true" className="absolute inset-x-6 -bottom-px h-[3px] origin-left scale-x-0 rounded-full bg-crimson-500 transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:scale-x-100 group-focus-within:scale-x-100 motion-reduce:transition-none" />
-              </div>
-
-              <div className="flex flex-1 flex-col px-4 pb-3 pt-6">
-                <h3 className="font-display text-[1.85rem] leading-tight text-navy-900">
-                  <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size,color] duration-500 ease-[var(--ease-cinematic)] group-hover:bg-[length:100%_1px] group-hover:text-crimson-600">
-                    {d.name}
-                  </span>
-                </h3>
-                {d.role && (
-                  <p className="mt-1 text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-crimson-600">
-                    {d.role}
-                  </p>
-                )}
-                <p className="mt-2 flex flex-1 items-start gap-2 text-[0.9375rem] font-medium text-navy-700">
-                  <GraduationCap className="mt-0.5 size-4 shrink-0 text-crimson-500" aria-hidden="true" />
-                  {d.qualifications}
-                </p>
-
-                <div className="mt-6 flex items-center justify-between gap-4 border-t border-navy-900/[0.08] pt-4">
-                  <p className="flex min-w-0 items-center gap-2 text-sm text-muted">
-                    <BadgeCheck className="size-4 shrink-0 text-crimson-600" aria-hidden="true" />
-                    <span className="truncate">
-                      <span className="sr-only">Registration: </span>
-                      {d.registration}
-                    </span>
-                  </p>
-                  <a
-                    {...linkProps(whatsappHref(`Hello, I would like to book a consultation with ${d.name} (${d.speciality}).`))}
-                    aria-label={`Book a consultation with ${d.name}`}
-                    className="inline-flex min-h-11 shrink-0 cursor-pointer items-center gap-1.5 rounded-full bg-crimson-100 pl-4 pr-3 text-sm font-semibold text-crimson-600 ring-1 ring-crimson-200/80 transition-colors duration-300 hover:bg-crimson-500 hover:text-paper-50 hover:ring-crimson-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-crimson-500 group-hover:bg-crimson-500 group-hover:text-paper-50 group-hover:ring-crimson-500"
-                  >
-                    Book
-                    <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {/* lg: founder card (2 of 6 columns) beside the spotlight (4 of 6) */}
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-6 lg:gap-8">
+          {doctors.map((d, i) => [
+            <DoctorCard key={d.name} d={d} i={i} className="lg:col-span-2" />,
+            d.profile && <FounderSpotlight key={`${d.name}-profile`} d={d} />,
+          ])}
+        </div>
 
         {/* Help band for visitors who don't know which doctor to see */}
         <div data-reveal className="relative isolate mt-12 flex flex-col gap-6 overflow-hidden rounded-[2rem] bg-navy-900 px-7 py-8 text-paper-50 md:flex-row md:items-center md:justify-between md:px-10 lg:mt-16">

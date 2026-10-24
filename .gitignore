@@ -113,3 +113,7 @@ Thumbs.db
 UI-UX-IMPROVEMENTS.md
 ref.png
 image.png
+
+.firebaserc
+firebase.json
+.firebase

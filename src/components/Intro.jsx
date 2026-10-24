@@ -98,8 +98,18 @@ export default function Intro() {
             <blockquote data-reveal className="relative mt-6 max-w-xl pl-8">
               <span aria-hidden="true" className="absolute -left-1 -top-3 font-display text-6xl leading-none text-blush-400/70">“</span>
               <p className="font-display text-xl italic leading-snug text-navy-800 lg:text-[1.35rem]">{about.quote.text}</p>
-              <footer className="mt-3 flex items-center gap-3 font-sans text-sm font-semibold tracking-wide text-crimson-600">
-                <span aria-hidden="true" className="h-px w-8 bg-crimson-400" />— {about.quote.author}, {about.quote.title}
+              <footer className="mt-5 flex items-start gap-4">
+                <span aria-hidden="true" className="mt-[0.8rem] h-px w-10 shrink-0 bg-crimson-400" />
+                <span className="min-w-0">
+                  <cite className="block font-display text-[1.45rem] font-semibold not-italic leading-tight tracking-[-0.005em] text-navy-900 lg:text-[1.6rem]">
+                    {about.quote.author}
+                  </cite>
+                  <span className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans">
+                    <span className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-crimson-600">{about.quote.title}</span>
+                    <span aria-hidden="true" className="size-1 rounded-full bg-blush-400" />
+                    <span className="text-[0.8rem] font-medium text-muted">{about.quote.qualifications}</span>
+                  </span>
+                </span>
               </footer>
             </blockquote>
 

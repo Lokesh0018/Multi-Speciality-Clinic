@@ -16,10 +16,10 @@ export const clinic = {
 
   contact: {
     // E.164 digits without "+" for WhatsApp, e.g. "91XXXXXXXXXX"
-    whatsapp: '918912345678',
+    whatsapp: '919392290109',
     // Full tel number, e.g. "+91XXXXXXXXXX"
-    phone: '+918912345678',
-    phoneDisplay: '+91 891 234 5678',
+    phone: '+919392290109',
+    phoneDisplay: '+91 93922 90109',
     email: 'contact@drkimidiclinic.com',
   },
 
@@ -54,8 +54,9 @@ export const about = {
   story: 'Founded with a vision to deliver unhurried, patient-first healthcare, our clinic unites clinical expertise with advanced diagnostic and treatment technology.',
   quote: {
     text: 'True medical care begins with listening. Our commitment is to offer every patient the personal attention, transparency, and clinical excellence they deserve.',
-    author: 'Dr. Kimidi',
-    title: 'Chief Medical Consultant',
+    author: 'Dr. K. T. Gayitri Varma',
+    title: 'Founder & Chief Consultant',
+    qualifications: 'MBBS, FAM (Medical Cosmetology)',
   },
 }
 
@@ -237,31 +238,24 @@ export const journey = [
 /** Verified specialist team profiles */
 export const doctors = [
   {
-    name: 'Dr. Kimidi T. Gayatri Varam',
+    name: 'Dr. K. T. Gayitri Varma',
     speciality: 'Cosmetology & Aesthetics',
     role: 'Founder & Chief Consultant',
     qualifications: 'MBBS, FAM (Medical Cosmetology)',
     registration: 'Verified Medical Practitioner',
     bio: "Founder and Chief Consultant at Dr. Kimidi Multispeciality Clinic. A medical cosmetologist with extensive clinical experience in facial aesthetics, targeted skin therapies, hair restoration procedures, and interdisciplinary dental-care coordination.",
-    image: { src: asset('images/founder.webp'), alt: 'Dr. Kimidi T. Gayatri Varam — Founder & Chief Consultant' },
-  },
-  {
-    name: 'Dr. P. Rajesh Kumar',
-    speciality: 'Trichology & Hair Restoration',
-    role: 'Consultant Trichologist',
-    qualifications: 'MD (DVL), Trichology Specialist',
-    registration: 'AP Medical Council Verified',
-    bio: 'Specializing in painless single-sitting root canals, smile design, aesthetic veneers, and preventative oral health care with an attentive, patient-first clinical approach.',
-    image: { src: asset('media/placeholders/doctor-2.jpg'), alt: 'Dr. P. Rajesh Kumar — Consultant Trichologist' },
-  },
-  {
-    name: 'Dr. S. Sneha Reddy',
-    speciality: 'Dental Surgery & Aesthetics',
-    role: 'Senior Dental Surgeon',
-    qualifications: 'BDS, MDS (Conservative Dentistry & Endodontics)',
-    registration: 'Dental Council of India Verified',
-    bio: 'Dedicated to comprehensive hair and scalp diagnostics, specializing in advanced PRP/GFC therapies, clinical hair thinning management, and personalized alopecia treatment protocols.',
-    image: { src: asset('media/placeholders/doctor-3.jpg'), alt: 'Dr. S. Sneha Reddy — Senior Dental Surgeon' },
+    image: { src: asset('images/founder.webp'), alt: 'Dr. K. T. Gayitri Varma — Founder & Chief Consultant' },
+    /** Founder spotlight beside the portrait card */
+    profile: {
+      eyebrow: 'Meet the founder',
+      headline: 'Care that begins with',
+      headlineAccent: 'listening.',
+      story: [
+        'Dr. K. T. Gayitri Varma founded the clinic to bring skin, hair and dental care together under one roof, with one team and one standard of unhurried, patient-first care.',
+        'As a medical cosmetologist, Dr. Kimidi leads the clinic’s aesthetic and skin practice and coordinates with the dental team whenever a treatment plan spans more than one speciality.',
+      ],
+      focus: ['Facial aesthetics', 'Targeted skin therapies', 'Hair restoration', 'Dental-care coordination'],
+    },
   },
 ]
 
@@ -275,9 +269,9 @@ export const branches = [
       { days: 'Monday – Saturday', time: '9:00 AM – 9:00 PM' },
       { days: 'Sunday', time: '10:00 AM – 2:00 PM' },
     ],
-    phone: '+918912345678',
-    phoneDisplay: '+91 891 234 5678',
-    whatsapp: '918912345678',
+    phone: '+919392290109',
+    phoneDisplay: '+91 93922 90109',
+    whatsapp: '919392290109',
     mapUrl: 'https://maps.google.com/?q=PM+Palem+Visakhapatnam+Dr+Kimidi+Multispeciality+Clinic',
     image: { src: asset('images/clinic-1.webp'), alt: 'Dr. Kimidi Multispeciality Clinic PM Palem branch facility and reception', label: 'PM Palem branch' },
   },
