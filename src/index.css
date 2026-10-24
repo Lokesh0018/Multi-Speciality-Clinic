@@ -183,6 +183,40 @@
 }
 
 
+/* Specialities: before/after wipe position (0–100). Registered so the value
+   itself transitions, and the clip, divider and labels all ride one curve. */
+@property --ba {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Specialities: before/after handle pops in as the peek hint starts */
+@keyframes ba-nudge {
+  0% { transform: scale(0.6); }
+  45% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* Specialities: changing service photo. The new slide wipes in (from the
+   right going forward, the left going back) and settles from a slight zoom;
+   the old one drifts the other way underneath; a soft light rides the edge. */
+@keyframes slide-reveal-next { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0); } }
+@keyframes slide-reveal-prev { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes slide-settle { from { transform: scale(1.08); } }
+@keyframes slide-leave-next { to { transform: translateX(-10%); } }
+@keyframes slide-leave-prev { to { transform: translateX(10%); } }
+@keyframes slide-edge-next {
+  0% { transform: translateX(100%); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: none; opacity: 0; }
+}
+@keyframes slide-edge-prev {
+  0% { transform: translateX(-100%); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: none; opacity: 0; }
+}
+
 /* Specialities: service caption swap */
 @keyframes caption-in {
   from { opacity: 0; transform: translateY(10px); }

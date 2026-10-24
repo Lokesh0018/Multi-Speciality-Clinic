@@ -101,12 +101,42 @@ export const specialities = [
     summary:
       'Consultation-led care for skin concerns, beginning with a careful assessment and an unhurried conversation about your options.',
     services: [
-      { name: 'Acne & Scar Treatments', image: '/images/services/skin-acne.webp', alt: 'Young woman with acne receiving a targeted skin treatment' },
-      { name: 'Pigmentation & Melasma', image: '/images/services/skin-pigmentation.webp', alt: 'Close-up of facial skin with pigmentation marks' },
-      { name: 'Anti-Ageing & Rejuvenation', image: '/images/services/skin-anti-ageing.webp', alt: 'Clinician assessing a mature patient’s face for rejuvenation' },
-      { name: 'Laser Skin Treatments', image: '/images/services/skin-laser.webp', alt: 'Patient in protective goggles receiving a laser skin treatment' },
-      { name: 'Eczema & Allergy Care', image: '/images/services/skin-eczema.webp', alt: 'Dermatologist examining a patient’s skin at a consultation' },
-      { name: 'Chemical Peels & Medi-Facials', image: '/images/services/skin-peels.webp', alt: 'Patient receiving a professional facial treatment' },
+      {
+        name: 'Acne & Scar Treatments',
+        image: '/images/services/skin-acne-after.webp',
+        alt: 'Patient with clear, even skin after acne and scar treatment, during a microneedling session',
+        before: { image: '/images/services/skin-acne-before.webp', alt: 'The same patient before treatment, with active acne and acne scarring on the cheek' },
+      },
+      {
+        name: 'Pigmentation & Melasma',
+        image: '/images/services/skin-pigmentation-after.webp',
+        alt: 'Patient with an even, clear complexion after pigmentation treatment, during a laser session',
+        before: { image: '/images/services/skin-pigmentation-before.webp', alt: 'The same patient before treatment, with melasma patches across the cheek' },
+      },
+      {
+        name: 'Anti-Ageing & Rejuvenation',
+        image: '/images/services/skin-anti-ageing-after.webp',
+        alt: 'Patient with smoother, firmer facial skin after rejuvenation treatment, during a skin-tightening session',
+        before: { image: '/images/services/skin-anti-ageing-before.webp', alt: 'The same patient before treatment, with fine lines and uneven texture on the cheek and jaw' },
+      },
+      {
+        name: 'Laser Skin Treatments',
+        image: '/images/services/skin-laser-after.webp',
+        alt: 'Patient in protective goggles with clear, even skin after laser treatment',
+        before: { image: '/images/services/skin-laser-before.webp', alt: 'The same patient before treatment, with sun spots and uneven tone on the cheek' },
+      },
+      {
+        name: 'Eczema & Allergy Care',
+        image: '/images/services/skin-eczema-after.webp',
+        alt: 'Patient’s forearm with calm, clear skin after eczema care',
+        before: { image: '/images/services/skin-eczema-before.webp', alt: 'The same forearm before treatment, with a red, inflamed eczema patch' },
+      },
+      {
+        name: 'Chemical Peels & Medi-Facials',
+        image: '/images/services/skin-peels-after.webp',
+        alt: 'Patient with a fresh, glowing complexion after a chemical peel',
+        before: { image: '/images/services/skin-peels-before.webp', alt: 'The same patient before the result, with a peel solution being brushed onto the face' },
+      },
     ],
     image: { src: '/images/skin-care.webp', alt: 'Dermatologist examining a patient’s face in a clinic', label: 'Dermatology suite' },
     tone: 'crimson',
@@ -119,12 +149,42 @@ export const specialities = [
     summary:
       'Thoughtful evaluation of hair and scalp concerns, with suitable approaches explained clearly at your consultation.',
     services: [
-      { name: 'Hair Fall & Thinning Therapy', image: '/images/services/hair-fall.webp', alt: 'Hands holding a hairbrush with shed hair' },
-      { name: 'PRP & GFC Hair Treatments', image: '/images/services/hair-prp.webp', alt: 'Clinician administering an injection treatment' },
-      { name: 'Dandruff & Scalp Conditions', image: '/images/services/hair-scalp.webp', alt: 'Scalp serum being applied with a dropper' },
-      { name: 'Alopecia Management', image: '/images/services/hair-alopecia.webp', alt: 'Woman checking her hair in a hand mirror' },
-      { name: 'Laser Hair Stimulation', image: '/images/services/hair-laser.webp', alt: 'Patient receiving a scalp treatment at a clinic' },
-      { name: 'Hair Density Restoration', image: '/images/services/hair-density.webp', alt: 'Woman with long, dense, healthy hair' },
+      {
+        name: 'Hair Fall & Thinning Therapy',
+        image: '/images/services/hair-fall-after.webp',
+        alt: 'Patient with fuller hair along the parting after hair-fall therapy',
+        before: { image: '/images/services/hair-fall-before.webp', alt: 'The same patient before treatment, with visible thinning along the parting' },
+      },
+      {
+        name: 'PRP & GFC Hair Treatments',
+        image: '/images/services/hair-prp-after.webp',
+        alt: 'Patient with denser hair at the crown after PRP treatment',
+        before: { image: '/images/services/hair-prp-before.webp', alt: 'The same patient before treatment, with thinning at the crown as PRP is injected into the scalp' },
+      },
+      {
+        name: 'Dandruff & Scalp Conditions',
+        image: '/images/services/hair-scalp-after.webp',
+        alt: 'Clear, flake-free scalp under a dermatoscope after scalp treatment',
+        before: { image: '/images/services/hair-scalp-before.webp', alt: 'The same scalp before treatment, with dandruff flakes along the parting' },
+      },
+      {
+        name: 'Alopecia Management',
+        image: '/images/services/hair-alopecia-after.webp',
+        alt: 'Scalp with regrown hair where the bald patch was, after alopecia management',
+        before: { image: '/images/services/hair-alopecia-before.webp', alt: 'The same scalp before treatment, with a round alopecia patch examined under a dermatoscope' },
+      },
+      {
+        name: 'Laser Hair Stimulation',
+        image: '/images/services/hair-laser-after.webp',
+        alt: 'Man with fuller hair on top after a course of laser hair stimulation',
+        before: { image: '/images/services/hair-laser-before.webp', alt: 'The same patient before treatment, with thinning on top under a red-light laser cap' },
+      },
+      {
+        name: 'Hair Density Restoration',
+        image: '/images/services/hair-density-after.webp',
+        alt: 'Patient with dense hair across the crown after density restoration',
+        before: { image: '/images/services/hair-density-before.webp', alt: 'The same patient before treatment, with sparse hair across the crown' },
+      },
     ],
     image: { src: '/images/hair-care.webp', alt: 'Clinician examining a patient’s scalp and hair', label: 'Trichology care' },
     tone: 'blush',
@@ -137,15 +197,40 @@ export const specialities = [
     summary:
       'Calm, attentive dental care for everyday oral health and smile concerns, in a setting designed to put you at ease.',
     services: [
-      { name: 'Root Canal Treatment', image: '/images/services/dental-root-canal.webp', alt: 'Dentist performing a procedure on a patient' },
-      { name: 'Smile Design & Veneers', image: '/images/services/dental-veneers.webp', alt: 'Dentist matching a veneer shade guide to a smiling patient' },
-      { name: 'Teeth Whitening & Cleaning', image: '/images/services/dental-whitening.webp', alt: 'Close-up of a bright, healthy smile' },
-      { name: 'Dental Implants & Crowns', image: '/images/services/dental-implants.webp', alt: 'Model of a dental implant beside natural teeth' },
-      { name: 'Orthodontics & Aligners', image: '/images/services/dental-ortho.webp', alt: 'Close-up of braces being adjusted' },
-      { name: 'Preventive Oral Healthcare', image: '/images/services/dental-preventive.webp', alt: 'Patient at a routine dental check-up' },
+      {
+        name: 'Root Canal Treatment',
+        image: '/images/services/root-canal-after.webp',
+        alt: 'Restored molar with a clean, natural-looking filling after root canal treatment',
+        before: { image: '/images/services/root-canal-before.webp', alt: 'The same molar before treatment, with deep, dark decay in the biting surface' },
+      },
+      {
+        name: 'Zirconia Crowns',
+        image: '/images/services/zirconia-crowns-after.webp',
+        alt: 'Smile with even, natural-white front teeth after zirconia crowns',
+        before: { image: '/images/services/zirconia-crowns-before.webp', alt: 'The same smile before treatment, with a broken, decayed front tooth and stained neighbours' },
+      },
+      {
+        name: 'Smile Designing',
+        image: '/images/services/smile-designing-after.webp',
+        alt: 'Bright, evenly shaped smile after smile designing',
+        before: { image: '/images/services/smile-designing-before.webp', alt: 'The same smile before treatment, with yellowed, stained and uneven front teeth' },
+      },
+      {
+        name: 'Dental Implants',
+        image: '/images/services/dental-implants-after.webp',
+        alt: 'Complete smile with the missing front tooth replaced by an implant',
+        before: { image: '/images/services/dental-implants-before.webp', alt: 'The same smile before treatment, with a gap where an upper front tooth is missing' },
+      },
+      {
+        name: 'Clear Aligners',
+        image: '/images/services/clear-aligners-after.webp',
+        alt: 'Straight, evenly aligned teeth after clear aligner treatment',
+        before: { image: '/images/services/clear-aligners-before.webp', alt: 'The same smile before treatment, with crooked, crowded lower teeth' },
+      },
     ],
     image: { src: '/images/dental-care.webp', alt: 'Smiling patient in a dental chair holding a mirror', label: 'Dental suite' },
     tone: 'navy',
+    frame: 'landscape', // 4:3 photo frame: the dental photos are wide smiles
   },
 ]
 
